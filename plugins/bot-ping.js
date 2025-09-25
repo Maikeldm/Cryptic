@@ -38,12 +38,12 @@ var handler = async (m, { conn }) => {
         .filter(([jid, chat]) => jid.endsWith('@g.us') && chat.isChats && !chat.metadata?.read_only && !chat.metadata?.announce)
         .map(v => v[0])
 
-    let texto = `˚₊·—̳͟͞͞✞ *Ping del Bot*\n\n` +
-                `✞ Velocidad:\n> ⤿ ${latensi.toFixed(4)} ms\n\n` +
-                `✞ Actividad:\n> ⤿ ${muptime}\n\n` +
-                `✞ Chats:\n> ⤿ ${chats.length} Chats privados\n> ⤿ ${groups.length} Grupos\n\n` +
-                `✞ Servidor:\n> ⤿ RAM: ${format(totalmem() - freemem())} / ${format(totalmem())}\n\n` +
-                `ᥫ᭡ Información en tiempo real`
+    let texto = ` *Time Bot*\n\n` +
+                `> Velocidad:\n> ⤿ \`${latensi.toFixed(4)}\` ms\n\n` +
+                `> Actividad:\n> ⤿ \`${muptime}\`\n\n` +
+                `> Chats:\n> ⤿ \`${chats.length}\` Chats privados\n> ⤿ ${groups.length} Grupos\n\n` +
+                `> Servidor:\n> ⤿ RAM: \`${format(totalmem() - freemem())}\` / ${format(totalmem())}\n\n` +
+                `> relative time`
 
     const thumbnailBuffer = getRandomImage()
 
@@ -53,8 +53,8 @@ var handler = async (m, { conn }) => {
             text: texto,
             contextInfo: {
                 externalAdReply: {
-                    title: "⏱ Ping del Bot",
-                    body: "Información en tiempo real",
+                    title: "Time Bot",
+                    body: "Relative time",
                     thumbnail: thumbnailBuffer,
                     mediaType: 1,
                     renderLargerThumbnail: false,

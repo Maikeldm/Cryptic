@@ -37,23 +37,14 @@ async function sendAlbumMessage(conn, jid, medias, options) {
 
 let handler = async (m, { conn, args, usedPrefix }) => {
   const user = global.db.data.users[m.sender] || {};
-  const emoji = "🌟";
-
-  // Verificación de VIP
-  if (!user.premium || (user.premiumTime && user.premiumTime < Date.now())) {
-    return conn.reply(
-      m.chat,
-      `${emoji} Este comando es solo para usuarios *VIP*.\n\nAdquiere VIP usando *${usedPrefix}vip*.`,
-      m
-    );
-  }
+  const emoji = "🕷️";
 
   if (!args.length) {
-    return m.reply(`Por favor, proporciona una consulta.\n\nEjemplo: *${usedPrefix}pinterest gato*`);
+    return m.reply(`\n\nEjemplo: *${usedPrefix}pinterest Goku*`);
   }
 
   await conn.sendMessage(m.chat, {
-    react: { text: "⏱️", key: m.key },
+    react: { text: "⏳", key: m.key },
   });
 
   try {

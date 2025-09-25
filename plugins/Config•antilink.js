@@ -21,24 +21,23 @@ export async function before(m, { conn, isAdmin }) {
   let participant = metadata?.participants?.find(p => (p.id || p.jid) === (m.sender || m.key?.participant))
 
   if (participant?.admin === 'superadmin' && m.text.includes(grupoBase)) {
-    await conn.reply(m.chat, `⚔️ *Anti-Enlace activado, pero eres el creador del grupo (superadmin). Te salvaste.*`, m)
+
     return true
   }
 
   if (isAdmin) {
-    await conn.reply(m.chat, `⚠️ *Eres admin, el sistema no te expulsará aunque compartas enlaces.*`, m)
+
     return true
+
   }
 
   const thisGroupLink = `https://chat.whatsapp.com/${await conn.groupInviteCode(m.chat)}`
   if (m.text.includes(thisGroupLink)) return true
 
-  await conn.reply(
-    m.chat,
-    `📎 *¡ALERTA DE ENLACE PROHIBIDO!*\n\n⚠️ *@${m.sender.split('@')[0]}* ha compartido un enlace sospechoso.\n💀 *Eliminación inminente...*`,
-    m,
-    { mentions: [m.sender] }
-  )
+  await conn.sendMessage(m.chat, {
+    text: `> \`@${m.sender.split('@')[0]} Ha sido eliminado por antilink\``,
+    mentions: [m.sender]
+  })
 
   if (settings.restrict) {
     try {
@@ -54,10 +53,10 @@ export async function before(m, { conn, isAdmin }) {
 
       await conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
     } catch (e) {
-      return conn.reply(m.chat, `🚫 *Error al intentar eliminar:* ${e}`, m)
+      return conn.reply(m.chat, ` *Error ${e}`, m)
     }
   } else {
-    await conn.reply(m.chat, `⚙️ *Restricción desactivada.* No puedo expulsar a @${m.sender.split('@')[0]}`, m, { mentions: [m.sender] })
+    
   }
 
   return true

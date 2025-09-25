@@ -49,7 +49,7 @@ ${tituloEspecial}
 💡 Usa los comandos sabiamente y alcanza la gloria suprema.
 `.trim()
 
-  const url = 'https://files.catbox.moe/mfkwj2.jpg'
+  const url = 'https://files.catbox.moe/iaawwn.jpg'
 
   await conn.sendMessage(m.chat, {
     image: { url },

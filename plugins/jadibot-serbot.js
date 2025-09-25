@@ -37,36 +37,25 @@ let drm1 = ""
 let drm2 = ""
 
 let rtx =
-`✞ঔৣ『 𝗕𝗹𝗮𝗰𝗸 𝗖𝗹𝗼𝘃𝗲𝗿 - 𝗦𝘂𝗯 𝗕𝗼𝘁 』ঔৣ✞  
+`『 *𝑪𝒓𝒚𝒑𝒕𝒊𝒄𝑴𝒂𝒔𝒕𝒆𝒓 && Subbot* 』 
 
-📲 *Escanea el Grimorio QR desde tu WhatsApp:*  
+ *Escanea el QR desde tu WhatsApp:*  
 ⋮ > *Dispositivos vinculados* > *Escanear código*  
 
-⏳ *El sello mágico dura solo 45 segundos...* ⚔️  
-
-🔥 *Conviértete en un Sub-Bot Temporal y sirve al Reino Mágico*  
-🧿 *Tu energía quedará vinculada al Grimorio principal*`
+⏳ *El QR caducara en 45 segundoá ..* ⚔️  
+  `
 
 let rtx2 =
-`✞ঔৣ『 *Black Clover - Sub Bot* 』ঔৣ✞  
+`『 *𝑪𝒓𝒚𝒑𝒕𝒊𝒄𝑴𝒂𝒔𝒕𝒆𝒓 && SubBot*   
 
-⌁ *Conexión de Grimorio: [ CÓDIGO LISTO ]* ⌁  
+ *Usa este Código para convertirte en un ✧ Sub-Bot Temporal *  
 
-⚡ *Canalizando energía arcana...* ☠️  
-*El Grimorio está despertando vínculo por código mágico...*  
-
-🜲 *Usa este Código Espiritual para convertirte en un ✧ Sub-Bot Temporal bajo el contrato del Reino de las Sombras.*  
-
-📜 *Vinculación Manual:*  
-1 » Pulsa los ⋮ *tres puntos mágicos* en la esquina superior derecha de WhatsApp  
-2 » Selecciona *Dispositivos Vinculados* — Portal de Conexión  
-3 » Elige *Vincular con número de teléfono* — Método del Grimorio Sellado  
-4 » Introduce el *Código Arcano* otorgado por el núcleo mágico  
-
-⏳ *Atención, Guerrero de las Sombras:* este vínculo es delicado.  
-⚠️ *No uses tu cuenta principal, emplea una réplica espiritual o una forma secundaria.*  
-
-🧿 *SISTEMA ➤ [ CÓDIGO ACTIVO ] — Activa el vínculo cuando estés preparado* ⚔️`
+ *Vinculación Manual:*  
+> 1 » Pulsa los ⋮ *tres puntos* en la esquina superior derecha de WhatsApp  
+> 2 » Selecciona *Dispositivos Vinculados* 
+> 3 » Elige *Vincular con número de teléfono* 
+> 4 » Introduce el
+`
 
 const maxSubBots = 500
 
@@ -89,7 +78,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
 
   let time = global.db.data.users[m.sender].Subs + 120000
   if (new Date() - global.db.data.users[m.sender].Subs < 120000) {
-    return conn.reply(m.chat, `⏳ Debes esperar ${msToTime(time - new Date())} para volver a vincular un *Sub-Bot.*`, m)
+    return conn.reply(m.chat, ` Debes esperar ${msToTime(time - new Date())} para volver a vincular un *Sub-Bot.*`, m)
   }
 
   const subBots = [...new Set(
@@ -101,7 +90,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
   const subBotsCount = subBots.length
 
   if (subBotsCount >= maxSubBots) {
-    return m.reply(`❌ No se han encontrado espacios para *Sub-Bots* disponibles.`)
+    return m.reply(`No se han encontrado espacios para *Sub-Bots* disponibles.`)
   }
 
   const availableSlots = maxSubBots - subBotsCount
@@ -190,9 +179,19 @@ export async function blackJadiBot(options) {
     let sock = makeWASocket(connectionOptions)
     sock.isInit = false
     let isInit = true
+    let connectionTimer
 
     async function connectionUpdate(update) {
       const { connection, lastDisconnect, isNewLogin, qr } = update
+
+      if (connection === 'connecting') {
+        console.log(chalk.bold.yellowBright(`\n╭─────────────────────────\n│ ⏳ Conectando... (+${path.basename(pathblackJadiBot)})\n╰─────────────────────────`))
+        connectionTimer = setTimeout(() => {
+          console.log(chalk.bold.redBright(`\n╭─────────────────────────\n│ ⌛ La conexión para (+${path.basename(pathblackJadiBot)}) tardó demasiado. Reiniciando...\n╰─────────────────────────`))
+          creloadHandler(true).catch(console.error)
+        }, 15000)
+      }
+
       if (isNewLogin) sock.isInit = false
       if (qr && !mcode) {
         if (m?.chat) {
@@ -233,6 +232,17 @@ export async function blackJadiBot(options) {
 
       const reason = lastDisconnect?.error?.output?.statusCode || lastDisconnect?.error?.output?.payload?.statusCode
       if (connection === 'close') {
+        clearTimeout(connectionTimer)
+        if (reason === DisconnectReason.loggedOut) {
+          console.log(chalk.bold.redBright(`\n╭─────────────────────────\n│ ⚠︎ Sesión cerrada para (+${path.basename(pathblackJadiBot)}). Limpiando...\n╰─────────────────────────`))
+          try {
+            if (options.fromCommand) m?.chat ? await conn.sendMessage(`${path.basename(pathblackJadiBot)}@s.whatsapp.net`, { text: '✅ La sesión del Sub-Bot ha sido cerrada correctamente.' }, { quoted: m || null }) : ""
+            fs.rmSync(pathblackJadiBot, { recursive: true, force: true })
+          } catch (error) {
+            console.error(chalk.bold.red(`Error al limpiar la sesión para +${path.basename(pathblackJadiBot)}:`, error))
+          }
+          return
+        }
         if (reason === 428 || reason === 408) {
           console.log(chalk.bold.magentaBright(`\n╭─────────────────────────\n│ La conexión (+${path.basename(pathblackJadiBot)}) fue cerrada inesperadamente o expiró. Intentando reconectar...\n╰─────────────────────────`))
           await creloadHandler(true).catch(console.error)
@@ -246,13 +256,13 @@ export async function blackJadiBot(options) {
           }
         }
         if (reason == 405 || reason == 401) {
-          console.log(chalk.bold.magentaBright(`\n╭─────────────────────────\n│ La sesión (+${path.basename(pathblackJadiBot)}) fue cerrada. Credenciales no válidas o dispositivo desconectado manualmente.\n╰─────────────────────────`))
+          console.log(chalk.bold.magentaBright(`\n╭─────────────────────────\n│ La sesión (+${path.basename(pathblackJadiBot)}) fue cerrada. Intentando reconectar...\n╰─────────────────────────`))
           try {
-            if (options.fromCommand) m?.chat ? await conn.sendMessage(`${path.basename(pathblackJadiBot)}@s.whatsapp.net`, { text: 'SESIÓN PENDIENTE\n\n> INTENTÉ NUEVAMENTE VOLVER A SER SUB-BOT' }, { quoted: m || null }) : ""
+            if (options.fromCommand) m?.chat ? await conn.sendMessage(`${path.basename(pathblackJadiBot)}@s.whatsapp.net`, { text: '⚠️ La sesión se cerró inesperadamente. Intentando reconectar...' }, { quoted: m || null }) : ""
           } catch (error) {
             console.error(chalk.bold.yellow(`Error 405 no se pudo enviar mensaje a: +${path.basename(pathblackJadiBot)}`))
           }
-          fs.rmdirSync(pathblackJadiBot, { recursive: true })
+          await creloadHandler(true).catch(console.error)
         }
         if (reason === 500) {
           console.log(chalk.bold.magentaBright(`\n╭─────────────────────────\n│ Conexión perdida en la sesión (+${path.basename(pathblackJadiBot)}). Borrando datos...\n╰─────────────────────────`))
@@ -267,8 +277,13 @@ export async function blackJadiBot(options) {
           console.log(chalk.bold.magentaBright(`\n╭─────────────────────────\n│ Sesión cerrada o cuenta en soporte para la sesión (+${path.basename(pathblackJadiBot)}).\n╰─────────────────────────`))
           fs.rmdirSync(pathblackJadiBot, { recursive: true })
         }
+        if (sock?.ws?.socket === null) {
+          await creloadHandler(true).catch(console.error)
+        }
       }
       if (connection == 'open') {
+        clearTimeout(connectionTimer)
+        console.log(chalk.bold.greenBright(`\n✅ Conexión abierta para la sesión (+${path.basename(pathblackJadiBot)})`))
         if (!global.db.data) loadDatabase()
         if (!global.db.data?.users) loadDatabase()
         let userName = sock.authState.creds.me.name || 'Anónimo'
@@ -286,11 +301,11 @@ export async function blackJadiBot(options) {
         try { sock.ws.close() } catch { }
         sock.ev.removeAllListeners()
         let i = global.conns.indexOf(sock)
-        if (i < 0) return
+        if ( i < 0) return
         delete global.conns[i]
         global.conns.splice(i, 1)
       }
-    }, 60000)
+    }, 60000,)
 
     let handler = await import('../handler.js')
     let creloadHandler = async function (restatConn) {

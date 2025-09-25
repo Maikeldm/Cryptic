@@ -1,14 +1,14 @@
 import PhoneNumber from 'awesome-phonenumber'
 
 let handler = async (m, { conn, usedPrefix, text, args, command }) => {
-  let nomorown = '5215544876071' // Propietario
+  let nomorown = '593969533280' // Propietario
   let bio = (await conn.fetchStatus(nomorown + '@s.whatsapp.net').catch(_ => {}))?.status || 'Sin Biografía'
   let biobot = (await conn.fetchStatus(conn.user.jid).catch(_ => {}))?.status || 'Sin Biografía'
 
   await sendContactArray(conn, m.chat, [
-    [`${nomorown}`, `🥷🏻 Propietario`, `★ 𝐓𝐇𝐄 𝐂𝐀𝐑𝐋𝐎𝐒`, dev, correo, `MX`, `${global.yt}`, bio],
+    [`${nomorown}`, `Owner`, `𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘`, dev, correo, `MX`, `${global.yt}`, bio],
     [`${conn.user.jid.split('@')[0]}`, `El mejor bot👻`, `${packname}`, `📵 No Hacer Spam`, correo, `MX`, md, biobot],
-    [`5216641784469`, `Asistente black clover`, `Bot Helper`, 'Soporte', correo, `MX`, md, biobot]
+    [`593980075358`, `𝑪𝒓𝒚𝒑𝒕𝒊𝒄𝑴𝒂𝒔𝒕𝒆𝒓`, `Bot`, 'Soporte', correo, `MX`, md, biobot]
   ], m)
 }
 

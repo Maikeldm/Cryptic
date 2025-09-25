@@ -6,7 +6,7 @@ let handler = async (m, { conn, usedPrefix }) => {
   let totalreg = Object.keys(global.db.data.users).length
   let totalchats = Object.keys(global.db.data.chats).length
   let vs = global.vs || '1.0.0'
-  let pp = "https://files.catbox.moe/8lfoj3.jpg"
+  let pp = "https://files.catbox.moe/wyecvo.jpg"
 
   // Tiempo de actividad (uptime) del proceso principal
   if (process.send) {
@@ -36,22 +36,21 @@ let handler = async (m, { conn, usedPrefix }) => {
 
   let blackclover = `
 ╭━━━━◇◇◇━━━━⬣
-┃ ⚙️  *SISTEMA DE ESTADO*
-┃ 🔰 *BLACK CLOVER BOT* ⚔️
+┃   *SISTEMA DE ESTADO*
+┃  *𝑪𝒓𝒚𝒑𝒕𝒊𝒄𝑴𝒂𝒔𝒕𝒆𝒓* 🕷️
 ╰━━━━◇◇◇━━━━⬣
 
-👑 *Creador:* the-carlos
-📟 *Prefijo:* [ ${usedPrefix} ]
-📦 *Versión:* ${vs}
+> *Owner:* instagram.com/maikel.mp5_x
+> *Prefijo:* [ ${usedPrefix} ]
+> *Versión:* ${vs}
 
-📊 *Usuarios registrados:* ${totalreg}
-💬 *Total de chats:* ${totalchats}
-📢 *Grupos:* ${groupsIn.length}
-📩 *Privados:* ${totalchats - groupsIn.length}
-🧪 *SubBots activos:* ${totalUsers || '0'}
+> *Usuarios registrados:* ${totalreg}
+> *Grupos:* ${groupsIn.length}
+> *Privados:* ${totalchats - groupsIn.length}
+> *SubBots activos:* ${totalUsers || '0'}
 
-🕰️ *Actividad:* ${muptime}
-🚀 *Velocidad:* ${speed.toFixed(3)}s
+> *Actividad:* ${muptime}
+> *Velocidad:* ${speed.toFixed(3)}s
 `.trim()
 
   // Contacto para usar como mensaje citado (puedes ajustarlo)

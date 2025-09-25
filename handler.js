@@ -156,7 +156,7 @@ export async function handler(chatUpdate) {
       if (typeof plugin.all === 'function') await plugin.all.call(this, m, { chatUpdate, __dirname: ___dirname, __filename }).catch(console.error);
       if (!opts['restrict'] && plugin.tags?.includes('admin')) continue;
 
-      const str2Regex = str => str.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&');
+      const str2Regex = str => str.replace('#');
       let _prefix = plugin.customPrefix || conn.prefix || global.prefix;
       let match = (_prefix instanceof RegExp ? [[_prefix.exec(m.text), _prefix]] :
         Array.isArray(_prefix) ? _prefix.map(p => [p instanceof RegExp ? p.exec(m.text) : new RegExp(str2Regex(p)).exec(m.text), p instanceof RegExp ? p : new RegExp(str2Regex(p))]) :
@@ -264,13 +264,13 @@ export async function handler(chatUpdate) {
 
   global.dfail = (type, m, usedPrefix, command, conn) => {
     const msg = {
-        rowner: `🛑 *ACCESO RESTRINGIDOΩ*\n\n> Solo el *Creador Supremo* puede ejecutar este protocolo.\n\n🧬 Usuario Autorizado: 👑 𝙏𝙃𝙀 𝘾𝘼𝙍𝙇𝙊𝙎\n🔗 Sistema: root@asTa-bot://omega/core`,
-        owner: `⚙️🔒 *MÓDULO DEV: ACCESO BLOQUEADO*\n\n> Esta función está anclada a permisos de *𝙳𝙴𝚂𝙰𝚁𝚁𝙾𝙻𝙻𝙰𝙳𝙾𝚁*.\n\n🧠 Consola de Seguridad: dev@asta.ai/core.sh`,
-        premium: `*REQUIERE CUENTA PREMIUM*\n\n> 🚫 Módulo exclusivo para usuarios *𝙑𝙄𝙋 - 𝙋𝙍𝙀𝙈𝙄𝙐𝙈*.\n\n📡 Actualiza tu plan con: */vip*\n⚙️ Estado: denegado`,
+        rowner: `> *ACCESO DENEGADO`,
+        owner: `> ACCESO DENEGADO`,
+        premium: `*REQUIERE CUENTA PREMIUM*\n\n> 🚫 Módulo exclusivo para usuarios *𝙑𝙄𝙋 - 𝙋𝙍𝙀𝙈𝙄𝙐𝙈*.\n\n📡 Actualiza tu plan con: *#vip*\n⚙️ Estado: denegado`,
         private: `🔒 *SOLO CHAT PRIVADO* 📲\n\n> Este comando no puede ejecutarse en grupos por razones de seguridad.\n\n🧬 Ejecuta este protocolo directamente en el chat privado.`,
-        admin: `🛡️ *FUNCIÓN RESTRINGIDA*\n\n> Solo los administradores del *Grupo* tienen acceso.\n\n⚠️ Intento no autorizado.`,
-        unreg: `🧾 *NO REGISTRADO EN EL SISTEMA*\n\n> 🚫 *Acceso denegado:* No puedes usar los comandos sin registrarte.\n\n🔐 Regístrate con: */reg nombre.edad*\n📍 Ejemplo: */reg Asta.20*\n\n> 🥷🏻 *Instagram oficial del creador del bot  :*\nhttps://www.instagram.com/_carlitos.zx\n\n📂 *Creador del bot:* The Carlos`,
-        restrict: `🚷 *FUNCIÓN GLOBALMENTE BLOQUEADA*\n\n> Este comando fue deshabilitado por el *Operador Global* por motivos de seguridad cibernética.\n\n🔧 Módulo: /xvideos`
+        admin: ` *FUNCIÓN DENEGADA*\n\n> Solo los administradores del Grupo tienen acceso.\n\n`,
+        unreg: `> *NO REGISTRADO EN EL SISTEMA*\n\n> *Acceso denegado:* No puedes usar los comandos sin registrarte \n\n\`Regístrate con: *#reg nombre.edad*\`\n📍 Ejemplo: *#reg chocoplus.20*\n\n>  *Ig del creador del bot  :*\ninstagram.com/maikel.mp5_x\n\n *Owner* 𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘`,
+        restrict: `🚷 *FUNCIÓN GLOBALMENTE BLOQUEADA*\n\n> Este comando fue deshabilitado por el *Operador Global* por motivos de seguridad cibernética.\n\n🔧 Módulo: #xvideos`
         }[type];
 if (msg) return m.reply(msg).then(_ => m.react('✖️'))}
 

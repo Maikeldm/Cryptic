@@ -5,13 +5,13 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
   const user = global.db.data.users[m.sender]
 
   if (user.registered === true) {
-    return conn.sendMessage(m.chat, { text: `⚠️ Ya estás registrado, guerrero del Reino.\n\nUsa *${usedPrefix}perfil* para ver tu grimorio.` }, { quoted: m })
+    return conn.sendMessage(m.chat, { text: `\`Ya estás registrado\`\n\nUsa *${usedPrefix}perfil*` }, { quoted: m })
   }
 
   const regex = /^([a-zA-ZÀ-ÿñÑ\s]+)\.(\d{1,2})$/i
   if (!regex.test(text)) {
     return conn.sendMessage(m.chat, {
-      text: `⚠️ Formato incorrecto. Usa:\n*${usedPrefix + command} Nombre.Edad*\n\nEjemplo:\n*${usedPrefix + command} Asta.18*`
+      text: ` Formato incorrecto. Usa:\n*${usedPrefix + command} Nombre.Edad*\n\nEjemplo:\n*${usedPrefix + command} chocoplus.18*`
     }, { quoted: m })
   }
 
@@ -19,7 +19,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
   age = parseInt(age)
 
   if (age < 5 || age > 100) {
-    return conn.sendMessage(m.chat, { text: `⚠️ Edad no válida. Debe estar entre 5 y 100 años.` }, { quoted: m })
+    return conn.sendMessage(m.chat, { text: ` Edad no válida` }, { quoted: m })
   }
 
   // Datos aleatorios

@@ -19,23 +19,22 @@ let tags = {
 const defaultMenu = {
   before: `
 ⎯͟͞͞★ ✦ 𝙐𝙎𝙀𝙍 𝙎𝙏𝘼𝙏𝙐𝙎 ✦ ★͟͞͞⎯
-│ 🪐 𝙉𝙤𝙢𝙗𝙧𝙚   » %name  
-│ ⚙️ 𝙇𝙫𝙡       » %level  
-│ ⚡ 𝙀𝙭𝙥       » %exp / %maxexp  
-│ 🌐 𝙈𝙤𝙙𝙚      » %mode  
-│ ⏳ 𝘼𝙘𝙩𝙞𝙫𝙤   » %muptime  
-│ 👥 𝙐𝙨𝙪𝙖𝙧𝙞𝙤𝙨 » %totalreg  
+│  𝙉𝙤𝙢𝙗𝙧𝙚   » %name  
+│  𝙇𝙫𝙡       » %level  
+│  𝙀𝙭𝙥       » %exp / %maxexp  
+│  𝙈𝙤𝙙𝙚      » %mode  
+│  𝘼𝙘𝙩𝙞𝙫𝙤   » %muptime  
+│  𝙐𝙨𝙪𝙖𝙧𝙞𝙤𝙨 » %totalreg  
 ★━━━━━━━━━━━━━━━━━★
-
-🧬 » 𝗛𝗔𝗖𝗞 𝗡𝗢𝗗𝗘 𝗔𝗖𝗧𝗜𝗩𝗢 «  
-👑 » 𝗢𝗽𝗲𝗿𝗮𝗱𝗼𝗿:—͟͟͞͞𝐓𝐡𝐞 𝐂𝐚𝐫𝐥𝐨𝐬 𖣘 «
+  
+  » Owner: 𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 «
 %readmore
 `.trimStart(),
 
-header: '\n╭─〔 🦠 %category 〕─╮',
+header: '\n╭─〔 〽️ %category 〕─╮',
   body: '│ ⚙️ %cmd\n',
   footer: '╰────────────────╯',
-  after: '\n⌬ 𝗖𝗬𝗕𝗘𝗥 𝗠𝗘𝗡𝗨 ☠️ - Sistema ejecutado con éxito.'
+  after: '\n〽️ 𝗠𝗘𝗡𝗨 〽️ - '
 }
 
 let handler = async (m, { conn, usedPrefix: _p }) => {
@@ -97,20 +96,20 @@ let handler = async (m, { conn, usedPrefix: _p }) => {
 
     // el mejor bot 
     await conn.sendMessage(m.chat, {
-      video: { url: 'https://files.catbox.moe/n7wh11.mp4' },
+      image: { url: 'https://files.catbox.moe/iaawwn.jpg' },
       caption: text,
       gifPlayback: true,
-      footer: '🧠 BLACK CLOVER SYSTEM ☘️',
+      footer: '🕷️𝑪𝒓𝒚𝒑𝒕𝒊𝒄𝑴𝒂𝒔𝒕𝒆𝒓',
       buttons: [
-        { buttonId: `${_p}menurpg`, buttonText: { displayText: '🏛️ M E N U R P G' }, type: 1 },
-        { buttonId: `${_p}code`, buttonText: { displayText: '🕹 ＳＥＲＢＯＴ' }, type: 1 }
+        { buttonId: `${_p}menurpg`, buttonText: { displayText: 'M E N U R P G' }, type: 1 },
+        { buttonId: `${_p}code`, buttonText: { displayText: 'SER BOT' }, type: 1 }
       ],
       contextInfo: {
         externalAdReply: {
-          title: '𝕭𝖑𝖆𝖈𝖐 𝕮𝖑𝖔𝖛𝖊𝖗  | 𝕳𝖆𝖐 v777 🥷🏻',
-          body: ' —͟͟͞͞𖣘𝐓𝐡𝐞 𝐂𝐚𝐫𝐥𝐨𝐬 ㊗  ',
-          thumbnailUrl: 'https://files.catbox.moe/loczhh.jpg', 
-          sourceUrl: 'https://github.com/thecarlos19/black-clover-MD', 
+          title: '𝑪𝒓𝒚𝒑𝒕𝒊𝒄𝑴𝒂𝒔𝒕𝒆𝒓  | 𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘',
+          body: '  𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘  ',
+          thumbnailUrl: 'https://files.catbox.moe/lljzrv.jpg', 
+          sourceUrl: '', 
           mediaType: 1,
           renderLargerThumbnail: true
         }
@@ -119,7 +118,7 @@ let handler = async (m, { conn, usedPrefix: _p }) => {
 
   } catch (e) {
     console.error(e)
-    conn.reply(m.chat, '❎ Error al generar el menú del sistema.', m)
+    conn.reply(m.chat, ' Error al generar el menú del sistema.', m)
   }
 }
 
