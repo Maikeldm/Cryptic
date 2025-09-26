@@ -1,16 +1,3 @@
-/*
-⚠ PROHIBIDO EDITAR ⚠ 
-El codigo de este archivo esta totalmente hecho por:
-- The Carlos  (https://github.com/thecarlos19)
-
-El codigo de este archivo fue creado para:
-- Black-clover-MD (https://github.com/thecarlos19/Black-clover-MD)
-
-Adaptacion y edición echa por:
-- The carlos (https://github.com/thecarlos19)
-
-⚠ PROHIBIDO EDITAR ⚠ -- ⚠ PROHIBIDO EDITAR ⚠ -- ⚠ PROHIBIDO EDITAR ⚠
-*/
 import { useMultiFileAuthState, DisconnectReason, makeCacheableSignalKeyStore, fetchLatestBaileysVersion, Browsers } from "@whiskeysockets/baileys"
 import qrcode from "qrcode"
 import NodeCache from "node-cache"
@@ -181,6 +168,30 @@ export async function blackJadiBot(options) {
     let isInit = true
     let connectionTimer
 
+    // Reconexión agresiva e indefinida para subbots
+    let reconnectingSubbot = false
+    async function aggressiveReconnectSubbot() {
+      if (reconnectingSubbot) return
+      reconnectingSubbot = true
+      let intentos = 0
+      while (!sock?.user) {
+        intentos++
+        console.log(chalk.bold.yellowBright(`[RECONNECT-SUBBOT] Intentando reconectar subbot (${path.basename(pathblackJadiBot)})... intento #${intentos}`))
+        try {
+          await creloadHandler(true)
+          if (sock?.user) {
+            console.log(chalk.bold.greenBright(`[RECONNECT-SUBBOT] Reconexión subbot (${path.basename(pathblackJadiBot)}) exitosa en intento #${intentos}`))
+            reconnectingSubbot = false
+            break
+          }
+        } catch (e) {
+          console.error(`[RECONNECT-SUBBOT] Error en reconexión subbot (${path.basename(pathblackJadiBot)}):`, e)
+        }
+        await new Promise(res => setTimeout(res, 2000))
+      }
+      reconnectingSubbot = false
+    }
+
     async function connectionUpdate(update) {
       const { connection, lastDisconnect, isNewLogin, qr } = update
 
@@ -233,52 +244,48 @@ export async function blackJadiBot(options) {
       const reason = lastDisconnect?.error?.output?.statusCode || lastDisconnect?.error?.output?.payload?.statusCode
       if (connection === 'close') {
         clearTimeout(connectionTimer)
-        if (reason === DisconnectReason.loggedOut) {
-          console.log(chalk.bold.redBright(`\n╭─────────────────────────\n│ ⚠︎ Sesión cerrada para (+${path.basename(pathblackJadiBot)}). Limpiando...\n╰─────────────────────────`))
-          try {
-            if (options.fromCommand) m?.chat ? await conn.sendMessage(`${path.basename(pathblackJadiBot)}@s.whatsapp.net`, { text: '✅ La sesión del Sub-Bot ha sido cerrada correctamente.' }, { quoted: m || null }) : ""
-            fs.rmSync(pathblackJadiBot, { recursive: true, force: true })
-          } catch (error) {
-            console.error(chalk.bold.red(`Error al limpiar la sesión para +${path.basename(pathblackJadiBot)}:`, error))
-          }
-          return
+        // Elimina cualquier reply/mensaje al usuario
+        // Solo log, sin reply
+        switch (reason) {
+          case DisconnectReason.loggedOut:
+            console.log(chalk.bold.redBright(`\n╭─────────────────────────\n│ ⚠︎ Sesión cerrada para (+${path.basename(pathblackJadiBot)}). Limpiando...\n╰─────────────────────────`))
+            try {
+              fs.rmSync(pathblackJadiBot, { recursive: true, force: true })
+            } catch (error) {
+              console.error(chalk.bold.red(`Error al limpiar la sesión para +${path.basename(pathblackJadiBot)}:`, error))
+            }
+            return
+          case 428:
+          case 408:
+          case 440:
+          case 405:
+          case 401:
+          case 500:
+          case 515:
+          case 403:
+            console.log(chalk.bold.magentaBright(`\n╭─────────────────────────\n│ Reconexión automática para la sesión (+${path.basename(pathblackJadiBot)})\n╰─────────────────────────`))
+            setTimeout(async () => {
+              try {
+                await creloadHandler(true)
+              } catch (e) {
+                console.error('Error en reconexión automática subbot:', e)
+              }
+            }, 2000)
+            break
+          default:
+            // Reconexión automática para cualquier otro motivo
+            setTimeout(async () => {
+              try {
+                await creloadHandler(true)
+              } catch (e) {
+                console.error('Error en reconexión automática subbot:', e)
+              }
+            }, 2000)
+            break
         }
-        if (reason === 428 || reason === 408) {
-          console.log(chalk.bold.magentaBright(`\n╭─────────────────────────\n│ La conexión (+${path.basename(pathblackJadiBot)}) fue cerrada inesperadamente o expiró. Intentando reconectar...\n╰─────────────────────────`))
-          await creloadHandler(true).catch(console.error)
-        }
-        if (reason === 440) {
-          console.log(chalk.bold.magentaBright(`\n╭─────────────────────────\n│ La conexión (+${path.basename(pathblackJadiBot)}) fue reemplazada por otra sesión activa.\n╰─────────────────────────`))
-          try {
-            if (options.fromCommand) m?.chat ? await conn.sendMessage(`${path.basename(pathblackJadiBot)}@s.whatsapp.net`, { text: 'HEMOS DETECTADO UNA NUEVA SESIÓN, BORRE LA NUEVA SESIÓN PARA CONTINUAR\n\n> SI HAY ALGÚN PROBLEMA VUELVA A CONECTARSE' }, { quoted: m || null }) : ""
-          } catch (error) {
-            console.error(chalk.bold.yellow(`Error 440 no se pudo enviar mensaje a: +${path.basename(pathblackJadiBot)}`))
-          }
-        }
-        if (reason == 405 || reason == 401) {
-          console.log(chalk.bold.magentaBright(`\n╭─────────────────────────\n│ La sesión (+${path.basename(pathblackJadiBot)}) fue cerrada. Intentando reconectar...\n╰─────────────────────────`))
-          try {
-            if (options.fromCommand) m?.chat ? await conn.sendMessage(`${path.basename(pathblackJadiBot)}@s.whatsapp.net`, { text: '⚠️ La sesión se cerró inesperadamente. Intentando reconectar...' }, { quoted: m || null }) : ""
-          } catch (error) {
-            console.error(chalk.bold.yellow(`Error 405 no se pudo enviar mensaje a: +${path.basename(pathblackJadiBot)}`))
-          }
-          await creloadHandler(true).catch(console.error)
-        }
-        if (reason === 500) {
-          console.log(chalk.bold.magentaBright(`\n╭─────────────────────────\n│ Conexión perdida en la sesión (+${path.basename(pathblackJadiBot)}). Borrando datos...\n╰─────────────────────────`))
-          if (options.fromCommand) m?.chat ? await conn.sendMessage(`${path.basename(pathblackJadiBot)}@s.whatsapp.net`, { text: 'CONEXIÓN PÉRDIDA\n\n> INTENTÉ MANUALMENTE VOLVER A SER SUB-BOT' }, { quoted: m || null }) : ""
-          return creloadHandler(true).catch(console.error)
-        }
-        if (reason === 515) {
-          console.log(chalk.bold.magentaBright(`\n╭─────────────────────────\n│ Reinicio automático para la sesión (+${path.basename(pathblackJadiBot)}).\n╰─────────────────────────`))
-          await creloadHandler(true).catch(console.error)
-        }
-        if (reason === 403) {
-          console.log(chalk.bold.magentaBright(`\n╭─────────────────────────\n│ Sesión cerrada o cuenta en soporte para la sesión (+${path.basename(pathblackJadiBot)}).\n╰─────────────────────────`))
-          fs.rmdirSync(pathblackJadiBot, { recursive: true })
-        }
-        if (sock?.ws?.socket === null) {
-          await creloadHandler(true).catch(console.error)
+        // Reconexión agresiva e indefinida para subbots
+        if (sock?.ws?.socket === null || connection === 'close') {
+          aggressiveReconnectSubbot()
         }
       }
       if (connection == 'open') {
@@ -291,8 +298,7 @@ export async function blackJadiBot(options) {
         console.log(chalk.bold.cyanBright(`\n❒────────────【• SUB-BOT •】────────────❒\n│\n│ 🟢 ${userName} (+${path.basename(pathblackJadiBot)}) conectado exitosamente.\n│\n❒────────────【• CONECTADO •】────────────❒`))
         sock.isInit = true
         global.conns.push(sock)
-
-        if (m?.chat) await conn.sendMessage(m.chat, { text: args[0] ? `@${m.sender.split('@')[0]}, ya estás conectado, leyendo mensajes entrantes...` : `@${m.sender.split('@')[0]}, genial ya eres parte de nuestra familia de Sub-Bots.`, mentions: [m.sender] }, { quoted: m })
+        // Elimina cualquier reply/mensaje al usuario sobre reconexión
       }
     }
 

@@ -311,48 +311,130 @@ async function connectionUpdate(update) {
 
   if (connection === 'open') {
     console.log(chalk.bold.green('\n🧙‍♂️ BLACK CLOVER BOT CONECTADO ✞'))
+    reconnecting = false
   }
 
   if (connection === 'close') {
+    // Solo log, sin reply
     switch (reason) {
       case DisconnectReason.badSession:
       case DisconnectReason.loggedOut:
-        console.log(chalk.bold.redBright(`\n⚠︎ SESIÓN INVÁLIDA O CERRADA, BORRA LA CARPETA ${global.sessions} Y ESCANEA EL CÓDIGO QR ⚠︎`))
+        console.log(chalk.bold.redBright(`[CONN] SESIÓN INVÁLIDA O CERRADA, escanea QR de nuevo.`))
         break
-
       case DisconnectReason.connectionClosed:
-        console.log(chalk.bold.magentaBright(`\n⚠︎ CONEXIÓN CERRADA, REINICIANDO...`))
+        console.log(chalk.bold.magentaBright(`[CONN] CONEXIÓN CERRADA, REINICIANDO...`))
         break
-
       case DisconnectReason.connectionLost:
-        console.log(chalk.bold.blueBright(`\n⚠︎ CONEXIÓN PERDIDA, RECONECTANDO...`))
+        console.log(chalk.bold.blueBright(`[CONN] CONEXIÓN PERDIDA, RECONECTANDO...`))
         break
-
       case DisconnectReason.connectionReplaced:
-        console.log(chalk.bold.yellowBright(`\n⚠︎ CONEXIÓN REEMPLAZADA, OTRA SESIÓN INICIADA`))
+        console.log(chalk.bold.yellowBright(`[CONN] CONEXIÓN REEMPLAZADA, OTRA SESIÓN INICIADA`))
         return 
-
       case DisconnectReason.restartRequired:
-        console.log(chalk.bold.cyanBright(`\n☑ REINICIANDO SESIÓN...`))
+        console.log(chalk.bold.cyanBright(`[CONN] REINICIANDO SESIÓN...`))
         break
-
       case DisconnectReason.timedOut:
-        console.log(chalk.bold.yellowBright(`\n⚠︎ TIEMPO AGOTADO, REINTENTANDO CONEXIÓN...`))
+        console.log(chalk.bold.yellowBright(`[CONN] TIEMPO AGOTADO, REINTENTANDO CONEXIÓN...`))
         break
-
       default:
-        console.log(chalk.bold.redBright(`\n⚠︎ DESCONEXIÓN DESCONOCIDA (${reason || 'Desconocido'})`))
+        console.log(chalk.bold.redBright(`[CONN] DESCONEXIÓN DESCONOCIDA (${reason || 'Desconocido'})`))
         break
     }
 
-    // Si el websocket está cerrado, intenta reconectar
-    if (conn?.ws?.socket === null) {
-      await global.reloadHandler(true).catch(console.error)
-      global.timestamp.connect = new Date()
+    // Reconexión agresiva e indefinida
+    if (conn?.ws?.socket === null || connection === 'close') {
+      aggressiveReconnect()
     }
   }
 }
 process.on('uncaughtException', console.error)
+
+// Limpieza agresiva de basura, nunca creds.json
+function purgeSession() {
+  let directorio = readdirSync(`./${sessions}`)
+  directorio.forEach(file => {
+    if (file !== 'creds.json' && file !== 'creds-backup.json') {
+      try {
+        unlinkSync(`./${sessions}/${file}`)
+      } catch {}
+    }
+  })
+} 
+
+function purgeSessionSB() {
+  try {
+    const listaDirectorios = readdirSync(`./${jadi}/`);
+    listaDirectorios.forEach(directorio => {
+      if (statSync(`./${jadi}/${directorio}`).isDirectory()) {
+        readdirSync(`./${jadi}/${directorio}`).forEach(fileInDir => {
+          if (fileInDir !== 'creds.json' && fileInDir !== 'creds-backup.json') {
+            try {
+              unlinkSync(`./${jadi}/${directorio}/${fileInDir}`)
+            } catch {}
+          }
+        })
+      }
+    })
+  } catch (err) {
+    console.log(chalk.bold.red(`[PURGE] Error: ${err}`))
+  }
+}
+
+function purgeOldFiles() {
+  const directories = [`./${sessions}/`, `./${jadi}/`]
+  directories.forEach(dir => {
+    readdirSync(dir, (err, files) => {
+      if (err) throw err
+      files.forEach(file => {
+        if (file !== 'creds.json' && file !== 'creds-backup.json') {
+          try {
+            unlinkSync(path.join(dir, file))
+          } catch {}
+        }
+      })
+    })
+  })
+}
+
+// Backup de creds.json cada 10 minutos para máxima seguridad
+function backupCreds() {
+  try {
+    const credsPath = `./${sessions}/creds.json`
+    const backupPath = `./${sessions}/creds-backup.json`
+    if (existsSync(credsPath)) {
+      fs.copyFileSync(credsPath, backupPath)
+      console.log(chalk.bold.greenBright(`[BACKUP] creds.json respaldado correctamente.`))
+    }
+  } catch (e) {
+    console.log(chalk.bold.redBright(`[BACKUP] Error al respaldar creds.json: ${e}`))
+  }
+}
+setInterval(backupCreds, 1000 * 60 * 10) // cada 10 minutos
+
+// Reconexión agresiva e indefinida
+let reconnecting = false
+async function aggressiveReconnect() {
+  if (reconnecting) return
+  reconnecting = true
+  let intentos = 0
+  while (!conn?.user) {
+    intentos++
+    console.log(chalk.bold.yellowBright(`[RECONNECT] Intentando reconectar principal... intento #${intentos}`))
+    try {
+      await global.reloadHandler(true)
+      global.timestamp.connect = new Date()
+      if (conn?.user) {
+        console.log(chalk.bold.greenBright(`[RECONNECT] Reconexión principal exitosa en intento #${intentos}`))
+        reconnecting = false
+        break
+      }
+    } catch (e) {
+      console.error(`[RECONNECT] Error en reconexión principal:`, e)
+    }
+    await new Promise(res => setTimeout(res, 2000))
+  }
+  reconnecting = false
+}
 
 let isInit = true;
 let handler = await import('./handler.js')
@@ -497,86 +579,6 @@ filenames.forEach(file => {
 const filePath = join(tmpDir, file)
 unlinkSync(filePath)})
 }
-
-function purgeSession() {
-let prekey = []
-let directorio = readdirSync(`./${sessions}`)
-let filesFolderPreKeys = directorio.filter(file => {
-return file.startsWith('pre-key-')
-})
-prekey = [...prekey, ...filesFolderPreKeys]
-filesFolderPreKeys.forEach(files => {
-unlinkSync(`./${sessions}/${files}`)
-})
-} 
-
-function purgeSessionSB() {
-try {
-const listaDirectorios = readdirSync(`./${jadi}/`);
-let SBprekey = [];
-listaDirectorios.forEach(directorio => {
-if (statSync(`./${jadi}/${directorio}`).isDirectory()) {
-const DSBPreKeys = readdirSync(`./${jadi}/${directorio}`).filter(fileInDir => {
-return fileInDir.startsWith('pre-key-')
-})
-SBprekey = [...SBprekey, ...DSBPreKeys];
-DSBPreKeys.forEach(fileInDir => {
-if (fileInDir !== 'creds.json') {
-unlinkSync(`./${jadi}/${directorio}/${fileInDir}`)
-}})
-}})
-if (SBprekey.length === 0) {
-console.log(chalk.bold.green(`\n╭» ❍ ${jadi} ❍\n│→ NADA POR ELIMINAR \n╰― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ⌫ ♻︎`))
-} else {
-console.log(chalk.bold.cyanBright(`\n╭» ❍ ${jadi} ❍\n│→ ARCHIVOS NO ESENCIALES ELIMINADOS\n╰― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ⌫ ♻︎︎`))
-}} catch (err) {
-console.log(chalk.bold.red(`\n╭» ❍ ${jadi} ❍\n│→ OCURRIÓ UN ERROR\n╰― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ⌫ ♻\n` + err))
-}}
-
-function purgeOldFiles() {
-const directories = [`./${sessions}/`, `./${jadi}/`]
-directories.forEach(dir => {
-readdirSync(dir, (err, files) => {
-if (err) throw err
-files.forEach(file => {
-if (file !== 'creds.json') {
-const filePath = path.join(dir, file);
-unlinkSync(filePath, err => {
-if (err) {
-console.log(chalk.bold.red(`\n╭» ❍ ARCHIVO ❍\n│→ ${file} NO SE LOGRÓ BORRAR\n╰― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ⌫ ✘\n` + err))
-} else {
-console.log(chalk.bold.green(`\n╭» ❍ ARCHIVO ❍\n│→ ${file} BORRADO CON ÉXITO\n╰― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ⌫ ♻`))
-} }) }
-}) }) }) }
-
-function redefineConsoleMethod(methodName, filterStrings) {
-const originalConsoleMethod = console[methodName]
-console[methodName] = function() {
-const message = arguments[0]
-if (typeof message === 'string' && filterStrings.some(filterString => message.includes(atob(filterString)))) {
-arguments[0] = ""
-}
-originalConsoleMethod.apply(console, arguments)
-}}
-
-setInterval(async () => {
-if (stopped === 'close' || !conn || !conn.user) return
-await clearTmp()
-console.log(chalk.bold.cyanBright(`\n╭» ❍ MULTIMEDIA ❍\n│→ ARCHIVOS DE LA CARPETA TMP ELIMINADAS\n╰― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ⌫ ♻`))}, 1000 * 60 * 4) // 4 min 
-
-setInterval(async () => {
-if (stopped === 'close' || !conn || !conn.user) return
-await purgeSession()
-console.log(chalk.bold.cyanBright(`\n╭» ❍ ${global.sessions} ❍\n│→ SESIONES NO ESENCIALES ELIMINADAS\n╰― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ⌫ ♻`))}, 1000 * 60 * 10) // 10 min
-
-setInterval(async () => {
-if (stopped === 'close' || !conn || !conn.user) return
-await purgeSessionSB()}, 1000 * 60 * 10) 
-
-setInterval(async () => {
-if (stopped === 'close' || !conn || !conn.user) return
-await purgeOldFiles()
-console.log(chalk.bold.cyanBright(`\n╭» ❍ ARCHIVOS ❍\n│→ ARCHIVOS RESIDUALES ELIMINADAS\n╰― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ⌫ ♻`))}, 1000 * 60 * 10)
 
 _quickTest().then(() => conn.logger.info(chalk.bold(`✞ H E C H O\n`.trim()))).catch(console.error)
 

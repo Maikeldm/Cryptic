@@ -14615,3 +14615,3081 @@ Un grupo de personas se adentra en un manicomio abandonado para grabar un espect
 > ⤿ RAM: `8.39 GB` / 15.88 GB
 
 > relative time
+[25/9/2025, 7:27:09 p. m.] +593 96 953 3280 ~𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 > Pana
+[25/9/2025, 7:27:17 p. m.] +593 96 953 3280 ~𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 > El bot reconecto con tu número xd
+[25/9/2025, 7:27:18 p. m.] +593 96 953 3280 ~𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 > #p
+[25/9/2025, 7:27:20 p. m.] +58 426-9940771 ~null >  [1mTime Bot[22m
+
+> Velocidad:
+> ⤿ `0.0106` ms
+
+> Actividad:
+> ⤿ `00:01:50`
+
+> Chats:
+> ⤿ `8` Chats privados
+> ⤿ 4 Grupos
+
+> Servidor:
+> ⤿ RAM: `9.69 GB` / 15.88 GB
+
+> relative time
+[25/9/2025, 7:27:28 p. m.] +54 9 11 3151-8889 ~Downtex > Xdd
+[25/9/2025, 7:27:35 p. m.] +1 829-702-0420 ~🌻Yosmaily✨ > Bienvenido al qué vino
+[25/9/2025, 7:27:36 p. m.] +54 9 11 3151-8889 ~Downtex > No cerraste sesión?
+[25/9/2025, 7:27:39 p. m.] +57 304 2189142 ~Shopia❤️‍🩹 > Holaaaaaaaaaaaaaa
+[25/9/2025, 7:27:39 p. m.] +502 3608 3119 ~eimy🦇 > hooola
+[25/9/2025, 7:27:42 p. m.] +1 829-702-0420 ~🌻Yosmaily✨ > Hola
+[25/9/2025, 7:27:46 p. m.] +58 426-9940771 ~null > ¡Hola! 😎
+[25/9/2025, 7:27:49 p. m.] +593 96 953 3280 ~𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 > Solo lo cerré la consola
+[25/9/2025, 7:27:50 p. m.] +54 9 11 3151-8889 ~Downtex > Weón te acordás el comando que creaste de spam chat?
+[25/9/2025, 7:27:56 p. m.] +1 829-702-0420 ~🌻Yosmaily✨ > Ho~
+[25/9/2025, 7:27:56 p. m.] +593 96 953 3280 ~𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 > Ci
+[25/9/2025, 7:27:59 p. m.] +54 9 11 3151-8889 ~Downtex > Creo que sigue lo tengo, estuve viendo y lo encontré
+[25/9/2025, 7:28:01 p. m.] +1 829-702-0420 ~🌻Yosmaily✨ > Mo manches
+[25/9/2025, 7:28:06 p. m.] +1 829-702-0420 ~🌻Yosmaily✨ > Aquí hay más mujeres que barones, creo
+[25/9/2025, 7:28:14 p. m.] +58 412-9495283 ~Valentina☆ > Sii
+[25/9/2025, 7:28:17 p. m.] +52 734 136 1822 ~🍒Angy🌻 > Emo??
+[25/9/2025, 7:28:27 p. m.] +1 829-702-0420 ~🌻Yosmaily✨ > Jajjajaja
+[25/9/2025, 7:28:28 p. m.] +58 426-9940771 ~null > ✖ Comando rechazado.
+[1m#mport[22m
+📕 Usa [1m#help[22m para ver el menú.
+[25/9/2025, 7:28:31 p. m.] +54 9 11 3151-8889 ~Downtex > import { getContentType, downloadContentFromMessage } from '@adiwajshing/baileys'
+
+const handler = async (sock, m, args, groupMetadata) => {
+  if (!m.isGroup) return m.reply('Este comando solo funciona en grupos.')
+
+  const participants = groupMetadata.participants.map(p => p.id)
+  const mentionJid = participants.filter(p => p !== sock.user.id)
+
+  // Si el mensaje es una respuesta a un medio (sticker, imagen, video, etc)
+  if (m.quoted) {
+    const count = parseInt(args[0])
+    if (isNaN(count) || count > 30) return m.reply('Especifica cuántas veces (máx 30)')
+
+    for (let i = 0; i < count; i++) {
+      await sock.sendMessage(m.chat, {
+        forward: m.quoted.fakeObj,
+        mentions: mentionJid
+      }, { quoted: m })
+    }
+    return
+  }
+
+  // Si es texto plano: #spamtag mensaje 5
+  const [_, ...rest] = args
+  const text = rest.slice(0, -1).join(' ')
+  const count = parseInt(rest.slice(-1)[0])
+
+  if (!text || isNaN(count)) return m.reply('Uso: #spamtag mensaje 5')
+  if (count > 30) return m.reply('Máximo 30 repeticiones.')
+
+  const finalText = (text + '\n').repeat(count)
+
+  await sock.sendMessage(m.chat, {
+    text: finalText.trim(),
+    mentions: mentionJid
+  }, { quoted: m })
+}
+
+export default {
+  command: /^#?spamtag$/i,
+  tags: ['grupos'],
+  admin: true,
+  group: true,
+  handler
+}
+[25/9/2025, 7:28:31 p. m.] +54 9 11 3151-8889 ~Downtex > Era ese no?
+[25/9/2025, 7:28:33 p. m.] +1 829-702-0420 ~🌻Yosmaily✨ > No creo
+[25/9/2025, 7:28:39 p. m.] +58 412-5689337 ~~ Maikol > Bienvenida
+[25/9/2025, 7:28:47 p. m.] +58 426-9940771 ~null >  [1mFUNCIÓN DENEGADA[22m
+
+> Solo los administradores del Grupo tienen acceso.
+
+
+[25/9/2025, 7:28:48 p. m.] +54 9 11 3151-8889 ~Downtex > #mute
+[25/9/2025, 7:28:50 p. m.] +58 426-9940771 ~null > ✖️
+[25/9/2025, 7:28:54 p. m.] +54 9 3774 59-5919 ~Zairuuu > Gracias por los stickers mis amores
+[25/9/2025, 7:28:55 p. m.] +54 9 11 3151-8889 ~Downtex > Funciona tu mute?
+[25/9/2025, 7:29:00 p. m.] +57 304 2189142 ~Shopia❤️‍🩹 > Andaba perdida jajaja
+[25/9/2025, 7:29:03 p. m.] +593 96 953 3280 ~𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 > Ni idea es de The Carlos
+[25/9/2025, 7:29:06 p. m.] +58 412-5689337 ~~ Maikol > Y eso?
+[25/9/2025, 7:29:08 p. m.] +593 96 953 3280 ~𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 > #mute
+[25/9/2025, 7:29:09 p. m.] +58 426-9940771 ~null > [1mTus mensajes serán eliminados[22m
+[25/9/2025, 7:29:10 p. m.] +1 829-702-0420 ~🌻Yosmaily✨ > O
+[25/9/2025, 7:29:12 p. m.] +54 9 11 3151-8889 ~Downtex > Peen
+[25/9/2025, 7:29:14 p. m.] +1 829-702-0420 ~🌻Yosmaily✨ > X2
+[25/9/2025, 7:29:14 p. m.] +54 9 11 3151-8889 ~Downtex > Ddn
+[25/9/2025, 7:29:19 p. m.] +593 96 953 3280 ~𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 > No sirve su mamada
+[25/9/2025, 7:29:24 p. m.] +593 96 953 3280 ~𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 > #mute [94m@undefined[39m
+[25/9/2025, 7:29:25 p. m.] +58 426-9940771 ~null > [1mTus mensajes serán eliminados[22m
+[25/9/2025, 7:29:29 p. m.] +54 9 11 3151-8889 ~Downtex > Pene
+[25/9/2025, 7:29:29 p. m.] +58 426-9940771 ~null > [1mcomes[22m 😹
+[25/9/2025, 7:29:32 p. m.] +58 412-5689337 ~~ Maikol > Bienvenida
+[25/9/2025, 7:29:34 p. m.] +593 96 953 3280 ~𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 > xDdd
+[25/9/2025, 7:29:44 p. m.] +593 96 953 3280 ~𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 > Ni modo va tocar hacer actualización
+[25/9/2025, 7:29:46 p. m.] +52 734 136 1822 ~🍒Angy🌻 > Bienvenida
+[25/9/2025, 7:29:52 p. m.] +58 412-5689337 ~~ Maikol > JAJAJA y como te fue?
+[25/9/2025, 7:29:59 p. m.] +58 412-5689337 ~~ Maikol > Bienvenida
+[25/9/2025, 7:30:02 p. m.] +58 412-5689337 ~~ Maikol > Espera
+[25/9/2025, 7:30:07 p. m.] +58 412-5689337 ~~ Maikol > Yo te conozco
+[25/9/2025, 7:30:13 p. m.] +1 829-702-0420 ~🌻Yosmaily✨ > Hoo
+[25/9/2025, 7:30:34 p. m.] +58 412-9495283 ~Valentina☆ > Si?
+[25/9/2025, 7:30:40 p. m.] +58 412-5689337 ~~ Maikol > Tu no eras
+[25/9/2025, 7:30:41 p. m.] +54 9 11 3151-8889 ~Downtex > Pos si creo
+[25/9/2025, 7:30:44 p. m.] +58 412-5689337 ~~ Maikol > [94m@Daniela[39m
+[25/9/2025, 7:30:50 p. m.] +58 412-5689337 ~~ Maikol > La que practicaba gimnasia
+[25/9/2025, 7:30:51 p. m.] +58 412-5689337 ~~ Maikol > [94m@🍒Angy🌻[39m
+[25/9/2025, 7:30:52 p. m.] +58 416-1527390 ~Daniela > Que
+[25/9/2025, 7:30:55 p. m.] +54 9 11 3151-8889 ~Downtex > Weón deberías de mejorar tú bot, vos sabe de programación
+[25/9/2025, 7:30:56 p. m.] +58 412-5689337 ~~ Maikol > ?
+[25/9/2025, 7:30:59 p. m.] +58 412-5689337 ~~ Maikol > Que haces
+[25/9/2025, 7:30:59 p. m.] +52 734 136 1822 ~🍒Angy🌻 > Mandé??
+[25/9/2025, 7:31:03 p. m.] +58 412-5689337 ~~ Maikol > Que haces
+[25/9/2025, 7:31:11 p. m.] +58 416-1527390 ~Daniela > Tú que crees
+[25/9/2025, 7:31:17 p. m.] +52 734 136 1822 ~🍒Angy🌻 > Viendo un podcast y tú??
+[25/9/2025, 7:31:23 p. m.] +58 412-5689337 ~~ Maikol > De que o que?
+[25/9/2025, 7:31:27 p. m.] +52 734 136 1822 ~🍒Angy🌻 > Nos une mejor dicho
+[25/9/2025, 7:31:32 p. m.] +52 734 136 1822 ~🍒Angy🌻 > JAJAJA
+[25/9/2025, 7:31:33 p. m.] +52 734 136 1822 ~🍒Angy🌻 > Oye Maikol
+[25/9/2025, 7:31:39 p. m.] +52 734 136 1822 ~🍒Angy🌻 > Dile q dejé de mandar sus mamadas
+[25/9/2025, 7:31:43 p. m.] +1 829-702-0420 ~🌻Yosmaily✨ > X2
+[25/9/2025, 7:31:53 p. m.] +57 304 2189142 ~Shopia❤️‍🩹 > Y que
+[25/9/2025, 7:31:57 p. m.] +58 412-5689337 ~~ Maikol > Ok
+[25/9/2025, 7:31:59 p. m.] +57 304 2189142 ~Shopia❤️‍🩹 > No sé puede o qué
+[25/9/2025, 7:32:01 p. m.] +58 412-5689337 ~~ Maikol > xd
+[25/9/2025, 7:32:01 p. m.] +58 426-9940771 ~null > 😆
+[25/9/2025, 7:32:07 p. m.] +52 734 136 1822 ~🍒Angy🌻 > Por cierto tú eres nueva verdad??
+[25/9/2025, 7:32:10 p. m.] +58 426-9940771 ~null > 🔍 No detectado en el sistema:
+[1m#[22m
+📕 Usa [1m#help[22m para ver el menú.
+[25/9/2025, 7:32:10 p. m.] +58 412-5689337 ~~ Maikol > #
+[25/9/2025, 7:32:20 p. m.] +58 412-9495283 ~Valentina☆ > a
+[25/9/2025, 7:32:22 p. m.] +58 412-5689337 ~~ Maikol > Null es un bot xd?
+[25/9/2025, 7:32:23 p. m.] +52 734 136 1822 ~🍒Angy🌻 > Y tú
+[25/9/2025, 7:32:26 p. m.] +593 96 953 3280 ~𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 > Es que si supieras cómo me duelen los webitoz para hacer eso
+[25/9/2025, 7:32:33 p. m.] +58 412-9495283 ~Valentina☆ > Sisi
+[25/9/2025, 7:32:38 p. m.] +57 304 2189142 ~Shopia❤️‍🩹 > No estoy rompiendo ningúna de. Las reglas
+[25/9/2025, 7:32:42 p. m.] +58 412-5689337 ~~ Maikol > X2
+[25/9/2025, 7:32:46 p. m.] +52 734 136 1822 ~🍒Angy🌻 > Jajaja
+[25/9/2025, 7:32:49 p. m.] +58 412-5689337 ~~ Maikol > Si tranquila
+[25/9/2025, 7:32:51 p. m.] +52 734 136 1822 ~🍒Angy🌻 > JAJAJA mmm
+[25/9/2025, 7:32:56 p. m.] +58 412-5689337 ~~ Maikol > Dimelo
+[25/9/2025, 7:33:00 p. m.] +58 412-5689337 ~~ Maikol > Si entonces si eres tu
+[25/9/2025, 7:33:03 p. m.] +58 412-5689337 ~~ Maikol > #help
+[25/9/2025, 7:33:04 p. m.] +58 426-9940771 ~null > > [1mNO REGISTRADO EN EL SISTEMA[22m
+
+> [1mAcceso denegado:[22m No puedes usar los comandos sin registrarte 
+
+`Regístrate con: [1m#reg nombre.edad[22m`
+📍 Ejemplo: [1m#reg chocoplus.20[22m
+
+>  [1mIg del creador del bot  :[22m
+[94minstagram.com/maikel.mp5_x[39m
+
+ [1mOwner[22m 𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘
+[25/9/2025, 7:33:05 p. m.] +58 426-9940771 ~null > ✖️
+[25/9/2025, 7:33:18 p. m.] +52 734 136 1822 ~🍒Angy🌻 > Te llamas Daniela??
+[25/9/2025, 7:33:23 p. m.] +58 412-5689337 ~~ Maikol > Que miel
+[25/9/2025, 7:33:32 p. m.] +52 734 136 1822 ~🍒Angy🌻 > Le hiciste sticker ah tú mamá?
+[25/9/2025, 7:33:34 p. m.] +52 734 136 1822 ~🍒Angy🌻 > Ohhh lindo nombre
+[25/9/2025, 7:33:47 p. m.] +58 412-9495283 ~Valentina☆ > Yes
+[25/9/2025, 7:34:02 p. m.] +58 412-5689337 ~~ Maikol > Se llama Josefina
+[25/9/2025, 7:34:03 p. m.] +54 9 11 3151-8889 ~Downtex > Deberías de crear cualquier cosa 
+.mute 
+.unmute 
+El mío solo eliminaba mensjss, podés crear para que eliminé los dos, sticker y mensajes
+[25/9/2025, 7:34:06 p. m.] +52 734 136 1822 ~🍒Angy🌻 > Cómo??
+[25/9/2025, 7:34:11 p. m.] +52 734 136 1822 ~🍒Angy🌻 > Jajaja hora??
+[25/9/2025, 7:34:15 p. m.] +58 426-9940771 ~null > 🔍 No detectado en el sistema:
+[1m##reg[22m
+📕 Usa [1m#help[22m para ver el menú.
+[25/9/2025, 7:34:16 p. m.] +58 412-5689337 ~~ Maikol > *#reg MAIKI.15
+[25/9/2025, 7:34:27 p. m.] +58 412-5689337 ~~ Maikol > No entendí
+[25/9/2025, 7:34:31 p. m.] +58 412-5689337 ~~ Maikol > Esas bot está más malo xd
+[25/9/2025, 7:34:36 p. m.] +58 412-5689337 ~~ Maikol > Puro lesbianismo acá
+[25/9/2025, 7:34:38 p. m.] +57 304 2189142 ~Shopia❤️‍🩹 > Siii
+[25/9/2025, 7:34:41 p. m.] +52 734 136 1822 ~🍒Angy🌻 > Mandé??
+[25/9/2025, 7:34:42 p. m.] +58 412-5689337 ~~ Maikol > !kick null
+[25/9/2025, 7:34:50 p. m.] +593 96 953 3280 ~𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 > Estoy haciendo lo que te dije en la tarde
+[25/9/2025, 7:34:57 p. m.] +54 9 11 3151-8889 ~Downtex > Que era
+[25/9/2025, 7:35:04 p. m.] +54 9 11 3151-8889 ~Downtex > Lo del gif y eso
+[25/9/2025, 7:37:12 p. m.] +593 96 953 3280 ~𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 > Nono
+[25/9/2025, 7:37:16 p. m.] +593 96 953 3280 ~𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 > Para que no sé desconecte el bot
+[25/9/2025, 7:37:45 p. m.] +54 9 11 3151-8889 ~Downtex > Después uno de comprarperra-comprarputa 
+.comprarputa @user 
+'envia la imagen del usuario que menciono'
+'text [1mestá perra fue comprada por @user 10$[22m'
+[25/9/2025, 7:38:08 p. m.] +54 9 11 3151-8889 ~Downtex > Aahh
+[25/9/2025, 7:38:22 p. m.] +54 9 11 3151-8889 ~Downtex > Para que aguante la duración del subbot no?
+[25/9/2025, 7:38:37 p. m.] +593 96 953 3280 ~𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 > La del principal
+[25/9/2025, 7:38:49 p. m.] +593 96 953 3280 ~𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 > Ahora lo hago con los subbots
+[25/9/2025, 7:39:09 p. m.] +54 9 11 3151-8889 ~Downtex > Ahh
+[25/9/2025, 7:40:17 p. m.] undefined ~56945431264 > ↷✦;𝘽𝙞𝙚𝙣𝙫𝙚𝙣𝙞𝙙/𝙖 [94m@undefined[39m a ♣⚡𝙏𝙀𝘼𝙈 RC⚡♣!
+
+· · ─────── ·𖥸· ─────── · ·▶️𝙋𝙧𝙚𝙨𝙚𝙣𝙩𝙖𝙘𝙞𝙤́𝙣⏸
+    ▫️𝙀𝙙𝙖𝙙🩵🩶
+    ▫️𝙋𝙖𝙞́𝙨🗺
+    ▫️𝙁𝙤𝙩𝙤(𝙣𝙤 𝙤𝙗𝙡𝙞📸) 
+    ▫️𝙉𝙤𝙢𝙗𝙧𝙚😎
+
+ 
+✩̣̣̣̣̣ͯ┄•͙✧⃝•͙┄✩ͯ•͙͙✧⃝•͙͙✩ͯ┄•͙✧⃝•͙┄✩̣̣̣̣̣ͯ
+𝙻𝚘𝚜 𝚊𝚍𝚖𝚒𝚗𝚒𝚜𝚝𝚛𝚊𝚍𝚘𝚛𝚎𝚜 𝚜𝚘𝚗🎮
+ 
+▫️~May~🏐
+
+▫️SAMU⚽GK🧤
+
+▫️~luciii🗣️✨
+
+▫️Patata 🥔 
+
+[1mOWNER[22m
+
+▪️~XAVIER 👑
+
+▪️~ MAIKOL 🌌
+
+•◌•◌•◌•◌•◌•◌•◌•★•◌•◌•◌•◌•◌•◌•◌•
+
+𝑮𝒓𝒂𝒄𝒊𝒂𝒔 𝒑𝒐𝒓 𝒖𝒏𝒊𝒓𝒕𝒆 𝒂 𝒏𝒖𝒆𝒔𝒕𝒓𝒐 𝑮𝒓𝒖𝒑𝒐 𝒆𝒔𝒑𝒆𝒓𝒐 𝒒𝒖𝒆 𝒍𝒂 𝒑𝒂𝒔𝒆𝒔 𝒃𝒊𝒆𝒏 𝒚 𝒄𝒖𝒊𝒅𝒂𝒕𝒆 𝒂𝒒𝒖𝒊́ 𝒔𝒆 𝒅𝒆𝒔𝒑𝒊𝒅𝒆 Bot⛓️‍💥
+
+‧̍̊·̊‧̥°̩̥˚̩̩̥͙°̩̥‧̥·̊‧̍̊ ♡ °̩̥˚̩̩̥͙°̩̥ ·͙*̩̩͙˚̩̥̩̥*̩̩̥͙·̩̩̥͙*̩̩̥͙˚̩̥̩̥*̩̩͙‧͙ °̩̥˚̩̩̥͙°̩̥ ♡ ‧̍̊·̊‧̥°̩̥˚̩̩̥͙°̩̥‧̥·̊‧̍̊
+[25/9/2025, 7:40:17 p. m.] undefined ~🌻Yosmaily✨ > Ho~
+[25/9/2025, 7:40:18 p. m.] undefined ~🌻Yosmaily✨ > Mo manches
+[25/9/2025, 7:40:18 p. m.] undefined ~~ Maikol > Yo te conozco
+[25/9/2025, 7:40:19 p. m.] undefined ~~ Maikol > Espera
+[25/9/2025, 7:40:19 p. m.] undefined ~🍒Angy🌻 > Te llamas Daniela??
+[25/9/2025, 7:40:19 p. m.] undefined ~Daniela > Jajjaa
+[25/9/2025, 7:40:20 p. m.] undefined ~Daniela > Valerys
+[25/9/2025, 7:40:20 p. m.] undefined ~🍒Angy🌻 > Ohhh lindo nombre
+[25/9/2025, 7:40:20 p. m.] undefined ~~ Maikol > Bienvenida
+[25/9/2025, 7:40:21 p. m.] undefined ~🍒Angy🌻 > JAJAJA mmm
+[25/9/2025, 7:40:21 p. m.] undefined ~Daniela > Nop
+[25/9/2025, 7:40:22 p. m.] undefined ~Daniela > Sip
+[25/9/2025, 7:40:22 p. m.] undefined ~Daniela > Es mayor q yo jejeje
+[25/9/2025, 7:40:22 p. m.] undefined ~~ Maikol > !tag los nuevos presentense
+[25/9/2025, 7:40:23 p. m.] undefined ~56945431264 > [1mlos nuevos presentense[22m
+[25/9/2025, 7:40:23 p. m.] undefined ~🍒Angy🌻 > Jajaja
+[25/9/2025, 7:40:23 p. m.] undefined ~~ Maikol > Metela
+[25/9/2025, 7:40:23 p. m.] undefined ~~ Maikol > JAJAJA
+[25/9/2025, 7:40:23 p. m.] undefined ~Daniela > Siempre me regaña
+[25/9/2025, 7:40:23 p. m.] undefined ~🍒Angy🌻 > Jajajaja esok
+[25/9/2025, 7:40:23 p. m.] undefined ~~ Maikol > Asi es mejor
+[25/9/2025, 7:40:23 p. m.] undefined ~~ Maikol > !antilink disable
+[25/9/2025, 7:40:23 p. m.] undefined ~~ Maikol > Más gente
+[25/9/2025, 7:40:23 p. m.] undefined ~56945431264 > 🚫 [1mAntienlace desactivado.[22m
+> [1mEl cambio puede tardar hasta 1 minuto en aplicarse.[22m
+[25/9/2025, 7:40:23 p. m.] undefined ~56945431264 > ⚠️ [94m@~ Maikol[39m recibió un warn por enlaces prohibidos (2/5)
+[25/9/2025, 7:40:23 p. m.] undefined ~🍒Angy🌻 > Oigan
+[25/9/2025, 7:40:23 p. m.] undefined ~~ Maikol > !antilink disable
+[25/9/2025, 7:40:24 p. m.] undefined ~~ Maikol > Coño
+[25/9/2025, 7:40:24 p. m.] undefined ~Daniela > Lo ase por mi bien jajjaa
+[25/9/2025, 7:40:25 p. m.] undefined ~🌻Yosmaily✨ > Jajajaj
+[25/9/2025, 7:40:28 p. m.] undefined ~56945431264 > 🚫 [1mAntienlace ya estaba desactivado[22m en este grupo.
+[25/9/2025, 7:40:33 p. m.] undefined ~🍒Angy🌻 > Oye Maikol
+[25/9/2025, 7:40:40 p. m.] undefined ~Daniela > Nou
+[25/9/2025, 7:40:55 p. m.] undefined ~56945431264 > ⚠️ [94m@~ Maikol[39m recibió un warn por enlaces prohibidos (3/5)
+[25/9/2025, 7:41:01 p. m.] undefined ~~ Maikol > Porque
+[25/9/2025, 7:41:05 p. m.] undefined ~~ Maikol > Necesito el grupo activo
+[25/9/2025, 7:41:23 p. m.] undefined ~Daniela > Ya estamos nosotros
+[25/9/2025, 7:41:23 p. m.] undefined ~🍒Angy🌻 > Mí amigo Jesús ya no sé puede meter aquí,m
+[25/9/2025, 7:41:26 p. m.] undefined ~~ Maikol > Como?
+[25/9/2025, 7:41:32 p. m.] undefined ~~ Maikol > Pero todos mueren
+[25/9/2025, 7:41:41 p. m.] +54 9 11 3151-8889 ~Downtex > Desactivo el otro bot o ahí nms
+[25/9/2025, 7:41:42 p. m.] undefined ~~ Maikol > Y a todos les caigo mal
+[25/9/2025, 7:41:53 p. m.] undefined ~Daniela > Incluyendote
+[25/9/2025, 7:41:58 p. m.] undefined ~🌻Yosmaily✨ > Tengo un Emoji lindo para ti
+[25/9/2025, 7:42:05 p. m.] undefined ~Daniela > Epa porque abren el grupo tan tarde
+[25/9/2025, 7:42:14 p. m.] undefined ~~ Maikol > Como q tarde??
+[25/9/2025, 7:42:16 p. m.] undefined ~~ Maikol > Seh
+[25/9/2025, 7:42:19 p. m.] undefined ~Daniela > Jejje q será de ustedes se espera de todo
+[25/9/2025, 7:42:26 p. m.] undefined ~🍒Angy🌻 > Ósea si puedes meter ah mí amigo Jesús??
+[25/9/2025, 7:42:30 p. m.] undefined ~~ Maikol > Nou
+[25/9/2025, 7:42:36 p. m.] undefined ~Daniela > Me levanto a las 5
+[25/9/2025, 7:42:45 p. m.] undefined ~🍒Angy🌻 > Porqué??
+[25/9/2025, 7:42:51 p. m.] undefined ~~ Maikol > El se salio
+[25/9/2025, 7:42:56 p. m.] undefined ~Daniela > Y ustedes lo habrán como a las 9
+[25/9/2025, 7:43:03 p. m.] undefined ~🍒Angy🌻 > Oh yaya
+[25/9/2025, 7:43:06 p. m.] undefined ~~ Maikol > KAJAJAJA
+[25/9/2025, 7:43:12 p. m.] undefined ~🌻Yosmaily✨ > .
+[25/9/2025, 7:43:17 p. m.] undefined ~~ Maikol > Hoy fue porque me pare tarde
+[25/9/2025, 7:43:28 p. m.] undefined ~~ Maikol > Pero siempre se abre a las 6:00
+[25/9/2025, 7:43:34 p. m.] +593 96 953 3280 ~𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 > Espera
+[25/9/2025, 7:43:39 p. m.] undefined ~Daniela > La presa pone a la gente vieja
+[25/9/2025, 7:43:44 p. m.] undefined ~~ Maikol > Am
+[25/9/2025, 7:43:48 p. m.] +593 96 953 3280 ~𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 > Todavía voy a testear comandos
+[25/9/2025, 7:43:50 p. m.] undefined ~~ Maikol > Normal KAJAJA
+[25/9/2025, 7:43:55 p. m.] undefined ~Daniela > Iguan
+[25/9/2025, 7:43:59 p. m.] +54 9 11 3151-8889 ~Downtex > Dale
+[25/9/2025, 7:43:59 p. m.] undefined ~☾ ⋆*･*𝙈𝙞𝙜𝙪𝙚𝙡✪ > Vesga
+[25/9/2025, 7:44:06 p. m.] undefined ~☾ ⋆*･*𝙈𝙞𝙜𝙪𝙚𝙡✪ > Verga
+[25/9/2025, 7:44:10 p. m.] undefined ~Daniela > Oigan *
+[25/9/2025, 7:44:17 p. m.] undefined ~☾ ⋆*･*𝙈𝙞𝙜𝙪𝙚𝙡✪ > Y entonces
+[25/9/2025, 7:44:21 p. m.] undefined ~🍒Angy🌻 > Bno bro me voy cuídate voy hablar con alguien
+[25/9/2025, 7:44:32 p. m.] undefined ~🌻Yosmaily✨ > Que?
+[25/9/2025, 7:44:37 p. m.] undefined ~☾ ⋆*･*𝙈𝙞𝙜𝙪𝙚𝙡✪ > 189 mensajes
+[25/9/2025, 7:44:42 p. m.] undefined ~𝓼𝓸𝓯𝓲𝓪 > Yio soi nuev
+[25/9/2025, 7:44:47 p. m.] undefined ~☾ ⋆*･*𝙈𝙞𝙜𝙪𝙚𝙡✪ > Angy
+[25/9/2025, 7:44:53 p. m.] undefined ~🌻Yosmaily✨ > Poco
+[25/9/2025, 7:44:59 p. m.] undefined ~~ Maikol > Chao
+[25/9/2025, 7:45:03 p. m.] undefined ~Daniela > Bine a acá por algo algún chico q me diga algo
+[25/9/2025, 7:45:11 p. m.] undefined ~🍒Angy🌻 > Q paso??
+[25/9/2025, 7:45:25 p. m.] undefined ~🍒Angy🌻 > Quién??
+[25/9/2025, 7:45:35 p. m.] undefined ~🌻Yosmaily✨ > Pero ya tienes pareja
+[25/9/2025, 7:45:41 p. m.] undefined ~☾ ⋆*･*𝙈𝙞𝙜𝙪𝙚𝙡✪ > Nojoda puta tenia que ser
+[25/9/2025, 7:45:46 p. m.] undefined ~Daniela > No es eso
+[25/9/2025, 7:45:57 p. m.] undefined ~𝑪𝑜𝒄𝑜 > Hola
+[25/9/2025, 7:46:04 p. m.] undefined ~🍒Angy🌻 > ???
+[25/9/2025, 7:46:08 p. m.] undefined ~𝑪𝑜𝒄𝑜 > Hola
+[25/9/2025, 7:46:12 p. m.] undefined ~𝑪𝑜𝒄𝑜 > Hola
+[25/9/2025, 7:46:18 p. m.] undefined ~𝑪𝑜𝒄𝑜 > Hola
+[25/9/2025, 7:46:23 p. m.] undefined ~🍒Angy🌻 > Holaaaa
+[25/9/2025, 7:46:28 p. m.] undefined ~𝑪𝑜𝒄𝑜 > JJAJQJQUQUQUW
+[25/9/2025, 7:46:38 p. m.] undefined ~~ Maikol > Hola
+[25/9/2025, 7:46:44 p. m.] undefined ~Daniela > Es q me voy a vengar de quien le ISO daño ami hermana
+[25/9/2025, 7:46:55 p. m.] undefined ~𝑪𝑜𝒄𝑜 > Ay dios
+[25/9/2025, 7:47:00 p. m.] undefined ~🍒Angy🌻 > Ojh
+[25/9/2025, 7:47:06 p. m.] undefined ~~ Maikol > Como?
+[25/9/2025, 7:47:10 p. m.] undefined ~Daniela > La golpearon y eya aborto Ami sobrina
+[25/9/2025, 7:47:16 p. m.] undefined ~𝑪𝑜𝒄𝑜 > De que perod
+[25/9/2025, 7:47:21 p. m.] undefined ~𝑪𝑜𝒄𝑜 > Eprdi
+[25/9/2025, 7:47:27 p. m.] undefined ~Daniela > 😔
+[25/9/2025, 7:47:32 p. m.] undefined ~🌻Yosmaily✨ > Ya se quién es entonces
+[25/9/2025, 7:47:38 p. m.] undefined ~~ Maikol > Mierda
+[25/9/2025, 7:47:43 p. m.] undefined ~𝑪𝑜𝒄𝑜 > Eya
+[25/9/2025, 7:47:48 p. m.] undefined ~🌻Yosmaily✨ > Está en este grupo?
+[25/9/2025, 7:47:54 p. m.] undefined ~🍒Angy🌻 > Ohhh
+[25/9/2025, 7:47:58 p. m.] undefined ~Daniela > No
+[25/9/2025, 7:48:09 p. m.] undefined ~Daniela > Necesito saber cosas
+[25/9/2025, 7:48:14 p. m.] undefined ~🌻Yosmaily✨ > Ha confundida estoy
+[25/9/2025, 7:48:19 p. m.] undefined ~Daniela > Como vengarme
+[25/9/2025, 7:48:26 p. m.] undefined ~Daniela > Capas
+[25/9/2025, 7:48:30 p. m.] undefined ~Daniela > Lo mato
+[25/9/2025, 7:48:35 p. m.] undefined ~~ Maikol > Coño yosmaily tu eres media retrasaita o esque no te fluye la sangre???
+[25/9/2025, 7:48:40 p. m.] undefined ~🍒Angy🌻 > Ohh
+[25/9/2025, 7:48:46 p. m.] undefined ~🍒Angy🌻 > Te ayudamos,mm
+[25/9/2025, 7:49:03 p. m.] undefined ~🌻Yosmaily✨ > Naturalmente
+[25/9/2025, 7:49:13 p. m.] undefined ~🌻Yosmaily✨ > Se me olvidó
+[25/9/2025, 7:49:17 p. m.] undefined ~𝓼𝓸𝓯𝓲𝓪 > Ey ey, no le hable asi
+[25/9/2025, 7:49:28 p. m.] undefined ~~ Maikol > Perdon
+[25/9/2025, 7:49:33 p. m.] undefined ~🌻Yosmaily✨ > Maikol me asé bullying
+[25/9/2025, 7:49:49 p. m.] undefined ~𝓼𝓸𝓯𝓲𝓪 > Pobechita
+[25/9/2025, 7:49:59 p. m.] undefined ~🍒Angy🌻 > Porqué le haces bullying??
+[25/9/2025, 7:50:05 p. m.] undefined ~~ Maikol > Tu calla perra
+[25/9/2025, 7:50:17 p. m.] undefined ~𝓼𝓸𝓯𝓲𝓪 > Siguele
+[25/9/2025, 7:50:26 p. m.] undefined ~🍒Angy🌻 > Perro tú culo
+[25/9/2025, 7:50:42 p. m.] undefined ~~ Maikol > Perdón
+[25/9/2025, 7:50:58 p. m.] undefined ~𝓼𝓸𝓯𝓲𝓪 > Ujum
+[25/9/2025, 7:51:03 p. m.] undefined ~🌻Yosmaily✨ > Yo que ise para merecer eso
+[25/9/2025, 7:51:19 p. m.] undefined ~~ Maikol > Ser negra
+[25/9/2025, 7:51:24 p. m.] undefined ~🍒Angy🌻 > Ya cálmate Maikol
+[25/9/2025, 7:51:29 p. m.] undefined ~~ Maikol > JAJAJAKAJAJJAA
+[25/9/2025, 7:51:35 p. m.] undefined ~🍒Angy🌻 > No seas así
+[25/9/2025, 7:51:40 p. m.] undefined ~Daniela > Ey
+[25/9/2025, 7:51:45 p. m.] undefined ~Daniela > Callate
+[25/9/2025, 7:51:56 p. m.] undefined ~Daniela > Enserio
+[25/9/2025, 7:52:01 p. m.] undefined ~~ Maikol > Todos contra mi
+[25/9/2025, 7:52:13 p. m.] undefined ~🍒Angy🌻 > Ps si
+[25/9/2025, 7:52:17 p. m.] undefined ~🌻Yosmaily✨ > NO SOY NEGRA HIJO DE PERRA
+[25/9/2025, 7:52:22 p. m.] undefined ~🍒Angy🌻 > Es lo q te mereces
+[25/9/2025, 7:52:28 p. m.] undefined ~~ Maikol > [94m@☾ ⋆*･*𝙈𝙞𝙜𝙪𝙚𝙡✪[39m ayudas
+[25/9/2025, 7:52:34 p. m.] undefined ~𝓼𝓸𝓯𝓲𝓪 > Deja a mi yosmaily
+[25/9/2025, 7:52:44 p. m.] undefined ~Daniela > Enserio eres un maldito racista o q
+[25/9/2025, 7:52:48 p. m.] undefined ~🍒Angy🌻 > Verdad
+[25/9/2025, 7:52:55 p. m.] undefined ~~ Maikol > Seh
+[25/9/2025, 7:53:04 p. m.] undefined ~~ Maikol > Na mentira
+[25/9/2025, 7:53:10 p. m.] undefined ~~ Maikol > KAJAJAJJAA
+[25/9/2025, 7:53:15 p. m.] undefined ~𝓼𝓸𝓯𝓲𝓪 > Y si yo fuera negra?
+[25/9/2025, 7:53:31 p. m.] undefined ~~ Maikol > Muero
+[25/9/2025, 7:53:36 p. m.] undefined ~𝓼𝓸𝓯𝓲𝓪 > JAKAKKA
+[25/9/2025, 7:53:41 p. m.] undefined ~Daniela > Dejen el maldito racismo
+[25/9/2025, 7:53:53 p. m.] undefined ~🌻Yosmaily✨ > Maldito MAIKOL Jasón
+[25/9/2025, 7:53:57 p. m.] undefined ~🌻Yosmaily✨ > Apenas soy morena wey
+[25/9/2025, 7:54:03 p. m.] undefined ~🍒Angy🌻 > Ya cálmate tú también
+[25/9/2025, 7:54:08 p. m.] undefined ~🍒Angy🌻 > Por eso te dicen lo q te dicen
+[25/9/2025, 7:54:14 p. m.] undefined ~🌻Yosmaily✨ > Pero el fue quien comenzó
+[25/9/2025, 7:54:19 p. m.] undefined ~🌻Yosmaily✨ > Ya perdón amór
+[25/9/2025, 7:54:29 p. m.] undefined ~🌻Yosmaily✨ > Ya no vuelvo a hablar entonces
+[25/9/2025, 7:54:34 p. m.] undefined ~56945431264 > ↷✦;𝘽𝙞𝙚𝙣𝙫𝙚𝙣𝙞𝙙/𝙖 [94m@undefined[39m a ♣⚡𝙏𝙀𝘼𝙈 RC⚡♣!
+
+· · ─────── ·𖥸· ─────── · ·▶️𝙋𝙧𝙚𝙨𝙚𝙣𝙩𝙖𝙘𝙞𝙤́𝙣⏸
+    ▫️𝙀𝙙𝙖𝙙🩵🩶
+    ▫️𝙋𝙖𝙞́𝙨🗺
+    ▫️𝙁𝙤𝙩𝙤(𝙣𝙤 𝙤𝙗𝙡𝙞📸) 
+    ▫️𝙉𝙤𝙢𝙗𝙧𝙚😎
+
+ 
+✩̣̣̣̣̣ͯ┄•͙✧⃝•͙┄✩ͯ•͙͙✧⃝•͙͙✩ͯ┄•͙✧⃝•͙┄✩̣̣̣̣̣ͯ
+𝙻𝚘𝚜 𝚊𝚍𝚖𝚒𝚗𝚒𝚜𝚝𝚛𝚊𝚍𝚘𝚛𝚎𝚜 𝚜𝚘𝚗🎮
+ 
+▫️~May~🏐
+
+▫️SAMU⚽GK🧤
+
+▫️~luciii🗣️✨
+
+▫️Patata 🥔 
+
+[1mOWNER[22m
+
+▪️~XAVIER 👑
+
+▪️~ MAIKOL 🌌
+
+•◌•◌•◌•◌•◌•◌•◌•★•◌•◌•◌•◌•◌•◌•◌•
+
+𝑮𝒓𝒂𝒄𝒊𝒂𝒔 𝒑𝒐𝒓 𝒖𝒏𝒊𝒓𝒕𝒆 𝒂 𝒏𝒖𝒆𝒔𝒕𝒓𝒐 𝑮𝒓𝒖𝒑𝒐 𝒆𝒔𝒑𝒆𝒓𝒐 𝒒𝒖𝒆 𝒍𝒂 𝒑𝒂𝒔𝒆𝒔 𝒃𝒊𝒆𝒏 𝒚 𝒄𝒖𝒊𝒅𝒂𝒕𝒆 𝒂𝒒𝒖𝒊́ 𝒔𝒆 𝒅𝒆𝒔𝒑𝒊𝒅𝒆 Bot⛓️‍💥
+
+‧̍̊·̊‧̥°̩̥˚̩̩̥͙°̩̥‧̥·̊‧̍̊ ♡ °̩̥˚̩̩̥͙°̩̥ ·͙*̩̩͙˚̩̥̩̥*̩̩̥͙·̩̩̥͙*̩̩̥͙˚̩̥̩̥*̩̩͙‧͙ °̩̥˚̩̩̥͙°̩̥ ♡ ‧̍̊·̊‧̥°̩̥˚̩̩̥͙°̩̥‧̥·̊‧̍̊
+[25/9/2025, 7:54:58 p. m.] undefined ~~ Maikol > KAJAJAJA
+[25/9/2025, 7:55:04 p. m.] undefined ~~ Maikol > Bueno ya me calmo
+[25/9/2025, 7:55:08 p. m.] undefined ~🍒Angy🌻 > Ps ya cálmate te estás pasando de huevos
+[25/9/2025, 8:19:23 p. m.] +58 426-9940771 ~null > ⚡ [1mComando tan estúpido que fundió mi RAM.[22m
+[25/9/2025, 8:19:25 p. m.] +58 412-5689337 ~~ Maikol > #
+[25/9/2025, 8:19:26 p. m.] +58 412-5689337 ~~ Maikol > Oye
+[25/9/2025, 8:19:33 p. m.] +58 426-9940771 ~null > 😆
+[25/9/2025, 8:19:37 p. m.] +58 412-5689337 ~~ Maikol > #help
+[25/9/2025, 8:19:38 p. m.] +58 426-9940771 ~null > > [1mNO REGISTRADO EN EL SISTEMA[22m
+
+> [1mAcceso denegado:[22m No puedes usar los comandos sin registrarte 
+
+`Regístrate con: [1m#reg nombre.edad[22m`
+📍 Ejemplo: [1m#reg chocoplus.20[22m
+
+>  [1mIg del creador del bot  :[22m
+[94minstagram.com/maikel.mp5_x[39m
+
+ [1mOwner[22m 𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘
+[25/9/2025, 8:19:39 p. m.] +58 426-9940771 ~null > ✖️
+[25/9/2025, 8:19:42 p. m.] +58 412-5689337 ~~ Maikol > Xd
+[25/9/2025, 8:19:58 p. m.] +58 412-5689337 ~~ Maikol > Como funciona el bot?
+[25/9/2025, 8:20:12 p. m.] +58 412-5689337 ~~ Maikol > Yo quiero uno
+[25/9/2025, 8:20:36 p. m.] +58 426-9940771 ~null > 🧠 [1m¿Sabías que no puedes controlarme, imbécil?[22m
+[25/9/2025, 8:20:45 p. m.] +58 426-9940771 ~null > 😆
+[25/9/2025, 8:20:51 p. m.] +58 412-5689337 ~~ Maikol > xd
+[25/9/2025, 8:21:39 p. m.] +58 412-5689337 ~~ Maikol > #s
+[25/9/2025, 8:21:39 p. m.] +58 426-9940771 ~null > > [1mNO REGISTRADO EN EL SISTEMA[22m
+
+> [1mAcceso denegado:[22m No puedes usar los comandos sin registrarte 
+
+`Regístrate con: [1m#reg nombre.edad[22m`
+📍 Ejemplo: [1m#reg chocoplus.20[22m
+
+>  [1mIg del creador del bot  :[22m
+[94minstagram.com/maikel.mp5_x[39m
+
+ [1mOwner[22m 𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘
+[25/9/2025, 8:21:40 p. m.] +58 426-9940771 ~null > ✖️
+[25/9/2025, 8:24:11 p. m.] +58 426-9940771 ~null > 🔄 Iniciando registro mágico...
+[25/9/2025, 8:24:20 p. m.] +58 412-5689337 ~~ Maikol > #reg Maiki.20
+[25/9/2025, 8:24:29 p. m.] +58 412-5689337 ~~ Maikol > *#reg Maiki.20
+[25/9/2025, 8:24:33 p. m.] +58 412-5689337 ~~ Maikol > ??
+[25/9/2025, 8:24:35 p. m.] +58 412-5689337 ~~ Maikol > A
+[25/9/2025, 8:24:54 p. m.] +58 412-5689337 ~~ Maikol > #help
+[25/9/2025, 8:24:55 p. m.] +58 426-9940771 ~null > ⎯͟͞͞★ ✦ 𝙐𝙎𝙀𝙍 𝙎𝙏𝘼𝙏𝙐𝙎 ✦ ★͟͞͞⎯
+│  𝙉𝙤𝙢𝙗𝙧𝙚   » ~ Maikol  
+│  𝙇𝙫𝙡       »   
+│  𝙀𝙭𝙥       » 2812 / 69  
+│  𝙈𝙤𝙙𝙚      » Público  
+│  𝘼𝙘𝙩𝙞𝙫𝙤   » 00:09:18  
+│  𝙐𝙨𝙪𝙖𝙧𝙞𝙤𝙨 » 43  
+★━━━━━━━━━━━━━━━━━★
+  
+  » Owner: 𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 «
+
+
+
+╭─〔 〽️ ꜱɪꜱᴛᴇᴍᴀ 〕─╮
+│ ⚙️ #formarpareja5
+
+│ ⚙️ #totalfunciones
+
+│ ⚙️ #menu
+
+│ ⚙️ #menú
+
+│ ⚙️ #menu2
+
+│ ⚙️ #runtime
+
+│ ⚙️ #blocklist
+
+╰────────────────╯
+
+╭─〔 〽️ ɢʀᴜᴘᴏꜱ 〕─╮
+│ ⚙️ #enable <opción>
+
+│ ⚙️ #disable <opción>
+
+│ ⚙️ #staff
+
+│ ⚙️ #admins
+
+│ ⚙️ #listadmin
+
+│ ⚙️ #demote
+
+╰────────────────╯
+
+╭─〔 〽️ ꜱᴜʙ ʙᴏᴛꜱ 〕─╮
+│ ⚙️ #qr
+
+│ ⚙️ #code
+
+╰────────────────╯
+
+╭─〔 〽️ ᴀɴɪᴍᴇ 〕─╮
+│ ⚙️ #animelink
+
+│ ⚙️ #infoanime
+
+│ ⚙️ #topwaifus [página]
+
+│ ⚙️ #wvideo <nombre del personaje>
+
+│ ⚙️ #wimage <nombre del personaje>
+
+│ ⚙️ #charinfo <nombre del personaje>
+
+│ ⚙️ #winfo <nombre del personaje>
+
+│ ⚙️ #waifuinfo <nombre del personaje>
+
+│ ⚙️ #alisa
+
+│ ⚙️ #aihoshino
+
+│ ⚙️ #remcham
+
+│ ⚙️ #akira
+
+│ ⚙️ #akiyama
+
+│ ⚙️ #anna
+
+│ ⚙️ #asuna
+
+│ ⚙️ #ayuzawa
+
+│ ⚙️ #boruto
+
+│ ⚙️ #chiho
+
+│ ⚙️ #chitoge
+
+│ ⚙️ #deidara
+
+│ ⚙️ #erza
+
+│ ⚙️ #elaina
+
+│ ⚙️ #eba
+
+│ ⚙️ #emilia
+
+│ ⚙️ #hestia
+
+│ ⚙️ #hinata
+
+│ ⚙️ #inori
+
+│ ⚙️ #isuzu
+
+│ ⚙️ #itachi
+
+│ ⚙️ #itori
+
+│ ⚙️ #kaga
+
+│ ⚙️ #kagura
+
+│ ⚙️ #kaori
+
+│ ⚙️ #keneki
+
+│ ⚙️ #kotori
+
+│ ⚙️ #kurumitokisaki
+
+│ ⚙️ #madara
+
+│ ⚙️ #mikasa
+
+│ ⚙️ #miku
+
+│ ⚙️ #minato
+
+│ ⚙️ #naruto
+
+│ ⚙️ #nezuko
+
+│ ⚙️ #sagiri
+
+│ ⚙️ #sasuke
+
+│ ⚙️ #sakura
+
+╰────────────────╯
+
+╭─〔 〽️ ᴀᴜᴅɪᴏ 〕─╮
+│ ⚙️ #bass [vn]
+
+│ ⚙️ #blown [vn]
+
+│ ⚙️ #deep [vn]
+
+│ ⚙️ #earrape [vn]
+
+│ ⚙️ #fast [vn]
+
+│ ⚙️ #fat [vn]
+
+│ ⚙️ #nightcore [vn]
+
+│ ⚙️ #reverse [vn]
+
+│ ⚙️ #robot [vn]
+
+│ ⚙️ #slow [vn]
+
+│ ⚙️ #smooth [vn]
+
+│ ⚙️ #tupai [vn]
+
+╰────────────────╯
+
+╭─〔 〽️ ʙᴏᴛ 〕─╮
+│ ⚙️ #ping
+
+╰────────────────╯
+
+╭─〔 〽️ ʙᴜꜱᴄᴀᴅᴏʀ 〕─╮
+│ ⚙️ #pornhubsearch
+
+│ ⚙️ #tiktoksearch <txt>
+
+│ ⚙️ #xnxxsearch <query>
+
+│ ⚙️ #githubsearch
+
+│ ⚙️ #mercadolibre <búsqueda>
+
+│ ⚙️ #imagen <query>
+
+│ ⚙️ #gitclone
+
+╰────────────────╯
+
+╭─〔 〽️ ꜱᴇᴀʀᴄʜ 〕─╮
+│ ⚙️ #ytsearch [1m<texto>[22m
+
+│ ⚙️ #pinterest
+
+╰────────────────╯
+
+╭─〔 〽️ ɴꜱꜰᴡ 〕─╮
+│ ⚙️ #undefined
+
+│ ⚙️ #nsfwloli
+
+│ ⚙️ #nsfwfoot
+
+│ ⚙️ #nsfwass
+
+│ ⚙️ #nsfwbdsm
+
+│ ⚙️ #nsfwcum
+
+│ ⚙️ #nsfwero
+
+│ ⚙️ #nsfwfemdom
+
+│ ⚙️ #nsfwglass
+
+│ ⚙️ #nsfworgy
+
+│ ⚙️ #yuri
+
+│ ⚙️ #yaoi
+
+│ ⚙️ #panties
+
+│ ⚙️ #tetas
+
+│ ⚙️ #booty
+
+│ ⚙️ #ecchi
+
+│ ⚙️ #furro
+
+│ ⚙️ #hentai
+
+│ ⚙️ #trapito
+
+│ ⚙️ #imagenlesbians
+
+│ ⚙️ #pene
+
+│ ⚙️ #porno
+
+│ ⚙️ #randomxxx
+
+│ ⚙️ #pechos
+
+╰────────────────╯
+
+╭─〔 〽️ ᴏᴡɴᴇʀ 〕─╮
+│ ⚙️ #enable <opción>
+
+│ ⚙️ #disable <opción>
+
+│ ⚙️ #expired [1m<días>[22m
+
+│ ⚙️ #añadirmonedas @usuario cantidad
+
+│ ⚙️ #groups
+
+│ ⚙️ #grouplist
+
+│ ⚙️ #reunion
+
+│ ⚙️ #meeting
+
+│ ⚙️ #addprem [@user] <days>
+
+│ ⚙️ #autoadmin
+
+│ ⚙️ #copia
+
+│ ⚙️ #banuser <@tag> <razón>
+
+│ ⚙️ #broadcast
+
+│ ⚙️ #bc
+
+│ ⚙️ #broadcastgroup
+
+│ ⚙️ #bcgc
+
+│ ⚙️ #bcgc2
+
+│ ⚙️ #bcg
+
+│ ⚙️ #broadcast
+
+│ ⚙️ #bc3
+
+│ ⚙️ #cheat
+
+│ ⚙️ #cleartmp
+
+│ ⚙️ #delprem <@user>
+
+│ ⚙️ #dsowner
+
+│ ⚙️ > 
+
+│ ⚙️ => 
+
+│ ⚙️ $
+
+│ ⚙️ #fetch
+
+│ ⚙️ #get
+
+│ ⚙️ #ip <alamat ip>
+
+│ ⚙️ #join <link>
+
+│ ⚙️ #grupocrear <nombre>
+
+│ ⚙️ #nuevonombrebot <teks>
+
+│ ⚙️ #resetpersonajes
+
+│ ⚙️ #undefined
+
+│ ⚙️ #restart
+
+│ ⚙️ #unbanuser <@tag>
+
+│ ⚙️ #update
+
+│ ⚙️ #actualizar
+
+╰────────────────╯
+
+╭─〔 〽️ ᴛʀᴀɴꜱꜰᴏʀᴍᴀᴅᴏʀ 〕─╮
+│ ⚙️ #tourl2
+
+│ ⚙️ #tourl
+
+│ ⚙️ #togifaud
+
+╰────────────────╯
+
+╭─〔 〽️ ʜᴇʀʀᴀᴍɪᴇɴᴛᴀꜱ 〕─╮
+│ ⚙️ #toimg
+
+╰────────────────╯
+
+╭─〔 〽️ ᴅᴇꜱᴄᴀʀɢᴀꜱ 〕─╮
+│ ⚙️ #spotify [1m<nombre>[22m
+
+│ ⚙️ #imagen <query>
+
+│ ⚙️ #mediafire
+
+│ ⚙️ #pornhubdl
+
+│ ⚙️ #ytmp3
+
+│ ⚙️ #ytmp4doc
+
+│ ⚙️ #ytmp3doc
+
+│ ⚙️ #ytmp4 <url>
+
+│ ⚙️ #facebook
+
+│ ⚙️ #fb
+
+│ ⚙️ #instagram
+
+│ ⚙️ #ig
+
+╰────────────────╯
+
+╭─〔 〽️ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ 〕─╮
+│ ⚙️ #undefined
+
+╰────────────────╯
+
+╭─〔 〽️ ᴅʟ 〕─╮
+│ ⚙️ #tiktok
+
+╰────────────────╯
+
+╭─〔 〽️ ꜰᴜɴ 〕─╮
+│ ⚙️ #amistad
+
+│ ⚙️ #facto
+
+│ ⚙️ #love
+
+│ ⚙️ #mamada @tag
+
+│ ⚙️ #memev
+
+│ ⚙️ #pajeame
+
+│ ⚙️ #formartrio @usuario1 @usuario2
+
+│ ⚙️ #verdad
+
+│ ⚙️ #acertijo
+
+│ ⚙️ #gay <@tag> | <nombre>
+
+│ ⚙️ #lesbiana <@tag> | <nombre>
+
+│ ⚙️ #pajero <@tag> | <nombre>
+
+│ ⚙️ #pajera <@tag> | <nombre>
+
+│ ⚙️ #puto <@tag> | <nombre>
+
+│ ⚙️ #puta <@tag> | <nombre>
+
+│ ⚙️ #manco <@tag> | <nombre>
+
+│ ⚙️ #manca <@tag> | <nombre>
+
+│ ⚙️ #rata <@tag> | <nombre>
+
+│ ⚙️ #prostituta <@tag> | <nombre>
+
+│ ⚙️ #prostituto <@tag> | <nombre>
+
+│ ⚙️ #consejo
+
+│ ⚙️ #dance [1m<@user>[22m
+
+│ ⚙️ #doxear
+
+│ ⚙️ #formarpareja5
+
+│ ⚙️ #enamorada @tag
+
+│ ⚙️ #math
+
+│ ⚙️ #meme
+
+│ ⚙️ #personalidad
+
+│ ⚙️ #piropo
+
+│ ⚙️ #pokedex [1m<pokemon>[22m
+
+│ ⚙️ #ppt
+
+│ ⚙️ #reto
+
+│ ⚙️ #ruleta [1m<cantidad> <color>[22m
+
+│ ⚙️ #simi
+
+│ ⚙️ #bot
+
+│ ⚙️ #top [1m<texto>[22m
+
+│ ⚙️ #zodiac [1m2002 02 25[22m
+
+╰────────────────╯
+
+╭─〔 〽️ ɢᴀᴄʜᴀ 〕─╮
+│ ⚙️ #antirobo <hora|dia|semana|mes>
+
+│ ⚙️ #claim
+
+│ ⚙️ #desbloquear @usuario
+
+│ ⚙️ #listawaifus
+
+│ ⚙️ #miswaifus
+
+│ ⚙️ #resetwaifus
+
+│ ⚙️ #robarwaifu <id>
+
+│ ⚙️ #robawaifu <id>
+
+│ ⚙️ #ver
+
+│ ⚙️ #rw
+
+│ ⚙️ #rollwaifu
+
+╰────────────────╯
+
+╭─〔 〽️ ᴇᴍᴏx 〕─╮
+│ ⚙️ #agarrarnalgas @tag
+
+│ ⚙️ #anal/culiar @tag
+
+│ ⚙️ #angry/enojado @tag
+
+│ ⚙️ #bath/bañarse @tag
+
+│ ⚙️ #blowjob/mamada @tag
+
+│ ⚙️ #blush/sonrojarse @tag
+
+│ ⚙️ #chuparpata @tag
+
+│ ⚙️ #cry/llorar @tag
+
+│ ⚙️ #cuddle/acurrucarse @tag
+
+│ ⚙️ #drunk/borracho @tag
+
+│ ⚙️ #grabboobs/agarrartetas @tag
+
+│ ⚙️ #hello/hola @tag
+
+│ ⚙️ #hug/abrazar @tag
+
+│ ⚙️ #kill/matar @tag
+
+│ ⚙️ #kiss/besar @tag
+
+│ ⚙️ #kiss2/besar2 @tag
+
+│ ⚙️ #love2/enamorada @tag
+
+│ ⚙️ #patt/acariciar @tag
+
+│ ⚙️ #penetrar @user
+
+│ ⚙️ #punch/golpear @tag
+
+│ ⚙️ #sad/triste @tag
+
+│ ⚙️ #scared/asustada @tag
+
+│ ⚙️ #seduce/seducir @tag
+
+│ ⚙️ #sexo/sex @tag
+
+│ ⚙️ #sleep/dormir @tag
+
+│ ⚙️ #violar/perra @tag
+
+╰────────────────╯
+
+╭─〔 〽️ ᴇᴄᴏɴᴏᴍʏ 〕─╮
+│ ⚙️ #undefined
+
+╰────────────────╯
+
+╭─〔 〽️ ɴꜱꜰᴡꜱ 〕─╮
+│ ⚙️ #follar @tag
+
+╰────────────────╯
+
+╭─〔 〽️ ɢʀᴜᴘᴏ 〕─╮
+│ ⚙️ #kick @usuario
+
+│ ⚙️ #add
+
+│ ⚙️ #group <abrir/cerrar>
+
+│ ⚙️ #grupo <abrir/cerrar>
+
+│ ⚙️ #encuesta <text|text2>
+
+│ ⚙️ #undefined
+
+│ ⚙️ #hidetag
+
+│ ⚙️ #infogrupo
+
+│ ⚙️ #invite [1m<numero>[22m
+
+│ ⚙️ #link
+
+│ ⚙️ #listadv
+
+│ ⚙️ #promote
+
+│ ⚙️ #revoke
+
+│ ⚙️ #tagall [1m<mesaje>[22m
+
+│ ⚙️ #invocar [1m<mesaje>[22m
+
+╰────────────────╯
+
+╭─〔 〽️ ᴛᴏᴏʟꜱ 〕─╮
+│ ⚙️ #upscale
+
+│ ⚙️ #fake
+
+│ ⚙️ #ssweb
+
+│ ⚙️ #ss
+
+│ ⚙️ #trad
+
+│ ⚙️ #spamwa <number>|<mesage>|<no of messages>
+
+│ ⚙️ #IPdoxx
+
+╰────────────────╯
+
+╭─〔 〽️ ɪᴍᴀɢᴇ 〕─╮
+│ ⚙️ #upscale
+
+╰────────────────╯
+
+╭─〔 〽️ ᴀɪ 〕─╮
+│ ⚙️ #toanime
+
+│ ⚙️ #toghibli
+
+│ ⚙️ #suno <prompt>
+
+╰────────────────╯
+
+╭─〔 〽️ ɪᴍɢ 〕─╮
+│ ⚙️ #waifu
+
+╰────────────────╯
+
+╭─〔 〽️ ɪɴꜰᴏ 〕─╮
+│ ⚙️ #creador
+
+│ ⚙️ #owner
+
+│ ⚙️ #status
+
+│ ⚙️ #grupos
+
+│ ⚙️ reglas
+
+│ ⚙️ #script
+
+│ ⚙️ #reportar
+
+╰────────────────╯
+
+╭─〔 〽️ ᴊᴀᴅɪʙᴏᴛ 〕─╮
+│ ⚙️ #bots
+
+│ ⚙️ #token
+
+│ ⚙️ #gettoken
+
+│ ⚙️ #serbottoken
+
+╰────────────────╯
+
+╭─〔 〽️ ʀᴘɢ 〕─╮
+│ ⚙️ #menurpg
+
+│ ⚙️ #tenertodo
+
+│ ⚙️ #lb [página]
+
+│ ⚙️ #bank
+
+│ ⚙️ #banco
+
+│ ⚙️ #cajamisteriosa
+
+│ ⚙️ #cazar
+
+│ ⚙️ #daily
+
+│ ⚙️ #claim
+
+│ ⚙️ #escudo <horas>
+
+│ ⚙️ #cambiarexp <cantidad>
+
+│ ⚙️ #explorar
+
+│ ⚙️ #invocacion
+
+│ ⚙️ #levelup
+
+│ ⚙️ #listarpersonajes
+
+│ ⚙️ #minar
+
+│ ⚙️ #miestatus
+
+│ ⚙️ #mimonedas
+
+│ ⚙️ #miexp
+
+│ ⚙️ #mispersonajes
+
+│ ⚙️ #mispjs
+
+│ ⚙️ #inventario
+
+│ ⚙️ #comprarpersonaje <nombre>
+
+│ ⚙️ #reinado
+
+│ ⚙️ #reinado reset
+
+│ ⚙️ #rob2
+
+│ ⚙️ #rob
+
+│ ⚙️ #sacrificar <nombre>
+
+│ ⚙️ #toppersonajes
+
+│ ⚙️ #trabajar
+
+│ ⚙️ #work
+
+│ ⚙️ #transferir [1m@usuario cantidad[22m
+
+│ ⚙️ #invasionzombie
+
+╰────────────────╯
+
+╭─〔 〽️ ꜰɪx 〕─╮
+│ ⚙️ #dsowner
+
+╰────────────────╯
+
+╭─〔 〽️ ʀɢ 〕─╮
+│ ⚙️ #profile
+
+│ ⚙️ #unreg
+
+╰────────────────╯
+
+╭─〔 〽️ ᴘʀᴇᴍɪᴜᴍ 〕─╮
+│ ⚙️ #comprarpremium <cantidad> <unidad>
+
+│ ⚙️ #listavip
+
+╰────────────────╯
+
+╭─〔 〽️ ᴊᴜᴇɢᴏꜱ 〕─╮
+│ ⚙️ #cajamisteriosa
+
+╰────────────────╯
+
+╭─〔 〽️ ᴇᴄᴏɴᴏᴍɪᴀ 〕─╮
+│ ⚙️ #cajamisteriosa
+
+│ ⚙️ #listarpersonajes
+
+│ ⚙️ #miestatus
+
+│ ⚙️ #mimonedas
+
+│ ⚙️ #miexp
+
+│ ⚙️ #mispersonajes
+
+│ ⚙️ #mispjs
+
+│ ⚙️ #inventario
+
+│ ⚙️ #trabajar
+
+│ ⚙️ #work
+
+│ ⚙️ #transferir [1m@usuario cantidad[22m
+
+╰────────────────╯
+
+╭─〔 〽️ ᴇᴄᴏɴ 〕─╮
+│ ⚙️ #cambiarexp <cantidad>
+
+╰────────────────╯
+
+╭─〔 〽️ ʀᴀɴᴋɪɴɢ 〕─╮
+│ ⚙️ #reinado
+
+│ ⚙️ #reinado reset
+
+│ ⚙️ #toppersonajes
+
+╰────────────────╯
+
+╭─〔 〽️ ꜱᴛɪᴄᴋᴇʀ 〕─╮
+│ ⚙️ #sticker <imagen|video|url>
+
+│ ⚙️ #stiker <imagen|video|url>
+
+│ ⚙️ #s <imagen|video|url>
+
+│ ⚙️ #qc <texto>
+
+│ ⚙️ #take <nombre>|<autor>
+
+╰────────────────╯
+
+〽️ 𝗠𝗘𝗡𝗨 〽️ - 
+[25/9/2025, 8:25:04 p. m.] +58 412-5689337 ~~ Maikol > #s
+[25/9/2025, 8:25:04 p. m.] +58 426-9940771 ~null > 📌 [1mEnvía o responde a una imagen/video/gif (máx 8s) o proporciona un enlace válido.[22m
+[25/9/2025, 8:25:06 p. m.] +58 412-5689337 ~~ Maikol > #help
+[25/9/2025, 8:25:07 p. m.] +58 426-9940771 ~null > ⎯͟͞͞★ ✦ 𝙐𝙎𝙀𝙍 𝙎𝙏𝘼𝙏𝙐𝙎 ✦ ★͟͞͞⎯
+│  𝙉𝙤𝙢𝙗𝙧𝙚   » ~ Maikol  
+│  𝙇𝙫𝙡       »   
+│  𝙀𝙭𝙥       » 2862 / 69  
+│  𝙈𝙤𝙙𝙚      » Público  
+│  𝘼𝙘𝙩𝙞𝙫𝙤   » 00:09:30  
+│  𝙐𝙨𝙪𝙖𝙧𝙞𝙤𝙨 » 43  
+★━━━━━━━━━━━━━━━━━★
+  
+  » Owner: 𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 «
+
+
+
+╭─〔 〽️ ꜱɪꜱᴛᴇᴍᴀ 〕─╮
+│ ⚙️ #formarpareja5
+
+│ ⚙️ #totalfunciones
+
+│ ⚙️ #menu
+
+│ ⚙️ #menú
+
+│ ⚙️ #menu2
+
+│ ⚙️ #runtime
+
+│ ⚙️ #blocklist
+
+╰────────────────╯
+
+╭─〔 〽️ ɢʀᴜᴘᴏꜱ 〕─╮
+│ ⚙️ #enable <opción>
+
+│ ⚙️ #disable <opción>
+
+│ ⚙️ #staff
+
+│ ⚙️ #admins
+
+│ ⚙️ #listadmin
+
+│ ⚙️ #demote
+
+╰────────────────╯
+
+╭─〔 〽️ ꜱᴜʙ ʙᴏᴛꜱ 〕─╮
+│ ⚙️ #qr
+
+│ ⚙️ #code
+
+╰────────────────╯
+
+╭─〔 〽️ ᴀɴɪᴍᴇ 〕─╮
+│ ⚙️ #animelink
+
+│ ⚙️ #infoanime
+
+│ ⚙️ #topwaifus [página]
+
+│ ⚙️ #wvideo <nombre del personaje>
+
+│ ⚙️ #wimage <nombre del personaje>
+
+│ ⚙️ #charinfo <nombre del personaje>
+
+│ ⚙️ #winfo <nombre del personaje>
+
+│ ⚙️ #waifuinfo <nombre del personaje>
+
+│ ⚙️ #alisa
+
+│ ⚙️ #aihoshino
+
+│ ⚙️ #remcham
+
+│ ⚙️ #akira
+
+│ ⚙️ #akiyama
+
+│ ⚙️ #anna
+
+│ ⚙️ #asuna
+
+│ ⚙️ #ayuzawa
+
+│ ⚙️ #boruto
+
+│ ⚙️ #chiho
+
+│ ⚙️ #chitoge
+
+│ ⚙️ #deidara
+
+│ ⚙️ #erza
+
+│ ⚙️ #elaina
+
+│ ⚙️ #eba
+
+│ ⚙️ #emilia
+
+│ ⚙️ #hestia
+
+│ ⚙️ #hinata
+
+│ ⚙️ #inori
+
+│ ⚙️ #isuzu
+
+│ ⚙️ #itachi
+
+│ ⚙️ #itori
+
+│ ⚙️ #kaga
+
+│ ⚙️ #kagura
+
+│ ⚙️ #kaori
+
+│ ⚙️ #keneki
+
+│ ⚙️ #kotori
+
+│ ⚙️ #kurumitokisaki
+
+│ ⚙️ #madara
+
+│ ⚙️ #mikasa
+
+│ ⚙️ #miku
+
+│ ⚙️ #minato
+
+│ ⚙️ #naruto
+
+│ ⚙️ #nezuko
+
+│ ⚙️ #sagiri
+
+│ ⚙️ #sasuke
+
+│ ⚙️ #sakura
+
+╰────────────────╯
+
+╭─〔 〽️ ᴀᴜᴅɪᴏ 〕─╮
+│ ⚙️ #bass [vn]
+
+│ ⚙️ #blown [vn]
+
+│ ⚙️ #deep [vn]
+
+│ ⚙️ #earrape [vn]
+
+│ ⚙️ #fast [vn]
+
+│ ⚙️ #fat [vn]
+
+│ ⚙️ #nightcore [vn]
+
+│ ⚙️ #reverse [vn]
+
+│ ⚙️ #robot [vn]
+
+│ ⚙️ #slow [vn]
+
+│ ⚙️ #smooth [vn]
+
+│ ⚙️ #tupai [vn]
+
+╰────────────────╯
+
+╭─〔 〽️ ʙᴏᴛ 〕─╮
+│ ⚙️ #ping
+
+╰────────────────╯
+
+╭─〔 〽️ ʙᴜꜱᴄᴀᴅᴏʀ 〕─╮
+│ ⚙️ #pornhubsearch
+
+│ ⚙️ #tiktoksearch <txt>
+
+│ ⚙️ #xnxxsearch <query>
+
+│ ⚙️ #githubsearch
+
+│ ⚙️ #mercadolibre <búsqueda>
+
+│ ⚙️ #imagen <query>
+
+│ ⚙️ #gitclone
+
+╰────────────────╯
+
+╭─〔 〽️ ꜱᴇᴀʀᴄʜ 〕─╮
+│ ⚙️ #ytsearch [1m<texto>[22m
+
+│ ⚙️ #pinterest
+
+╰────────────────╯
+
+╭─〔 〽️ ɴꜱꜰᴡ 〕─╮
+│ ⚙️ #undefined
+
+│ ⚙️ #nsfwloli
+
+│ ⚙️ #nsfwfoot
+
+│ ⚙️ #nsfwass
+
+│ ⚙️ #nsfwbdsm
+
+│ ⚙️ #nsfwcum
+
+│ ⚙️ #nsfwero
+
+│ ⚙️ #nsfwfemdom
+
+│ ⚙️ #nsfwglass
+
+│ ⚙️ #nsfworgy
+
+│ ⚙️ #yuri
+
+│ ⚙️ #yaoi
+
+│ ⚙️ #panties
+
+│ ⚙️ #tetas
+
+│ ⚙️ #booty
+
+│ ⚙️ #ecchi
+
+│ ⚙️ #furro
+
+│ ⚙️ #hentai
+
+│ ⚙️ #trapito
+
+│ ⚙️ #imagenlesbians
+
+│ ⚙️ #pene
+
+│ ⚙️ #porno
+
+│ ⚙️ #randomxxx
+
+│ ⚙️ #pechos
+
+╰────────────────╯
+
+╭─〔 〽️ ᴏᴡɴᴇʀ 〕─╮
+│ ⚙️ #enable <opción>
+
+│ ⚙️ #disable <opción>
+
+│ ⚙️ #expired [1m<días>[22m
+
+│ ⚙️ #añadirmonedas @usuario cantidad
+
+│ ⚙️ #groups
+
+│ ⚙️ #grouplist
+
+│ ⚙️ #reunion
+
+│ ⚙️ #meeting
+
+│ ⚙️ #addprem [@user] <days>
+
+│ ⚙️ #autoadmin
+
+│ ⚙️ #copia
+
+│ ⚙️ #banuser <@tag> <razón>
+
+│ ⚙️ #broadcast
+
+│ ⚙️ #bc
+
+│ ⚙️ #broadcastgroup
+
+│ ⚙️ #bcgc
+
+│ ⚙️ #bcgc2
+
+│ ⚙️ #bcg
+
+│ ⚙️ #broadcast
+
+│ ⚙️ #bc3
+
+│ ⚙️ #cheat
+
+│ ⚙️ #cleartmp
+
+│ ⚙️ #delprem <@user>
+
+│ ⚙️ #dsowner
+
+│ ⚙️ > 
+
+│ ⚙️ => 
+
+│ ⚙️ $
+
+│ ⚙️ #fetch
+
+│ ⚙️ #get
+
+│ ⚙️ #ip <alamat ip>
+
+│ ⚙️ #join <link>
+
+│ ⚙️ #grupocrear <nombre>
+
+│ ⚙️ #nuevonombrebot <teks>
+
+│ ⚙️ #resetpersonajes
+
+│ ⚙️ #undefined
+
+│ ⚙️ #restart
+
+│ ⚙️ #unbanuser <@tag>
+
+│ ⚙️ #update
+
+│ ⚙️ #actualizar
+
+╰────────────────╯
+
+╭─〔 〽️ ᴛʀᴀɴꜱꜰᴏʀᴍᴀᴅᴏʀ 〕─╮
+│ ⚙️ #tourl2
+
+│ ⚙️ #tourl
+
+│ ⚙️ #togifaud
+
+╰────────────────╯
+
+╭─〔 〽️ ʜᴇʀʀᴀᴍɪᴇɴᴛᴀꜱ 〕─╮
+│ ⚙️ #toimg
+
+╰────────────────╯
+
+╭─〔 〽️ ᴅᴇꜱᴄᴀʀɢᴀꜱ 〕─╮
+│ ⚙️ #spotify [1m<nombre>[22m
+
+│ ⚙️ #imagen <query>
+
+│ ⚙️ #mediafire
+
+│ ⚙️ #pornhubdl
+
+│ ⚙️ #ytmp3
+
+│ ⚙️ #ytmp4doc
+
+│ ⚙️ #ytmp3doc
+
+│ ⚙️ #ytmp4 <url>
+
+│ ⚙️ #facebook
+
+│ ⚙️ #fb
+
+│ ⚙️ #instagram
+
+│ ⚙️ #ig
+
+╰────────────────╯
+
+╭─〔 〽️ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ 〕─╮
+│ ⚙️ #undefined
+
+╰────────────────╯
+
+╭─〔 〽️ ᴅʟ 〕─╮
+│ ⚙️ #tiktok
+
+╰────────────────╯
+
+╭─〔 〽️ ꜰᴜɴ 〕─╮
+│ ⚙️ #amistad
+
+│ ⚙️ #facto
+
+│ ⚙️ #love
+
+│ ⚙️ #mamada @tag
+
+│ ⚙️ #memev
+
+│ ⚙️ #pajeame
+
+│ ⚙️ #formartrio @usuario1 @usuario2
+
+│ ⚙️ #verdad
+
+│ ⚙️ #acertijo
+
+│ ⚙️ #gay <@tag> | <nombre>
+
+│ ⚙️ #lesbiana <@tag> | <nombre>
+
+│ ⚙️ #pajero <@tag> | <nombre>
+
+│ ⚙️ #pajera <@tag> | <nombre>
+
+│ ⚙️ #puto <@tag> | <nombre>
+
+│ ⚙️ #puta <@tag> | <nombre>
+
+│ ⚙️ #manco <@tag> | <nombre>
+
+│ ⚙️ #manca <@tag> | <nombre>
+
+│ ⚙️ #rata <@tag> | <nombre>
+
+│ ⚙️ #prostituta <@tag> | <nombre>
+
+│ ⚙️ #prostituto <@tag> | <nombre>
+
+│ ⚙️ #consejo
+
+│ ⚙️ #dance [1m<@user>[22m
+
+│ ⚙️ #doxear
+
+│ ⚙️ #formarpareja5
+
+│ ⚙️ #enamorada @tag
+
+│ ⚙️ #math
+
+│ ⚙️ #meme
+
+│ ⚙️ #personalidad
+
+│ ⚙️ #piropo
+
+│ ⚙️ #pokedex [1m<pokemon>[22m
+
+│ ⚙️ #ppt
+
+│ ⚙️ #reto
+
+│ ⚙️ #ruleta [1m<cantidad> <color>[22m
+
+│ ⚙️ #simi
+
+│ ⚙️ #bot
+
+│ ⚙️ #top [1m<texto>[22m
+
+│ ⚙️ #zodiac [1m2002 02 25[22m
+
+╰────────────────╯
+
+╭─〔 〽️ ɢᴀᴄʜᴀ 〕─╮
+│ ⚙️ #antirobo <hora|dia|semana|mes>
+
+│ ⚙️ #claim
+
+│ ⚙️ #desbloquear @usuario
+
+│ ⚙️ #listawaifus
+
+│ ⚙️ #miswaifus
+
+│ ⚙️ #resetwaifus
+
+│ ⚙️ #robarwaifu <id>
+
+│ ⚙️ #robawaifu <id>
+
+│ ⚙️ #ver
+
+│ ⚙️ #rw
+
+│ ⚙️ #rollwaifu
+
+╰────────────────╯
+
+╭─〔 〽️ ᴇᴍᴏx 〕─╮
+│ ⚙️ #agarrarnalgas @tag
+
+│ ⚙️ #anal/culiar @tag
+
+│ ⚙️ #angry/enojado @tag
+
+│ ⚙️ #bath/bañarse @tag
+
+│ ⚙️ #blowjob/mamada @tag
+
+│ ⚙️ #blush/sonrojarse @tag
+
+│ ⚙️ #chuparpata @tag
+
+│ ⚙️ #cry/llorar @tag
+
+│ ⚙️ #cuddle/acurrucarse @tag
+
+│ ⚙️ #drunk/borracho @tag
+
+│ ⚙️ #grabboobs/agarrartetas @tag
+
+│ ⚙️ #hello/hola @tag
+
+│ ⚙️ #hug/abrazar @tag
+
+│ ⚙️ #kill/matar @tag
+
+│ ⚙️ #kiss/besar @tag
+
+│ ⚙️ #kiss2/besar2 @tag
+
+│ ⚙️ #love2/enamorada @tag
+
+│ ⚙️ #patt/acariciar @tag
+
+│ ⚙️ #penetrar @user
+
+│ ⚙️ #punch/golpear @tag
+
+│ ⚙️ #sad/triste @tag
+
+│ ⚙️ #scared/asustada @tag
+
+│ ⚙️ #seduce/seducir @tag
+
+│ ⚙️ #sexo/sex @tag
+
+│ ⚙️ #sleep/dormir @tag
+
+│ ⚙️ #violar/perra @tag
+
+╰────────────────╯
+
+╭─〔 〽️ ᴇᴄᴏɴᴏᴍʏ 〕─╮
+│ ⚙️ #undefined
+
+╰────────────────╯
+
+╭─〔 〽️ ɴꜱꜰᴡꜱ 〕─╮
+│ ⚙️ #follar @tag
+
+╰────────────────╯
+
+╭─〔 〽️ ɢʀᴜᴘᴏ 〕─╮
+│ ⚙️ #kick @usuario
+
+│ ⚙️ #add
+
+│ ⚙️ #group <abrir/cerrar>
+
+│ ⚙️ #grupo <abrir/cerrar>
+
+│ ⚙️ #encuesta <text|text2>
+
+│ ⚙️ #undefined
+
+│ ⚙️ #hidetag
+
+│ ⚙️ #infogrupo
+
+│ ⚙️ #invite [1m<numero>[22m
+
+│ ⚙️ #link
+
+│ ⚙️ #listadv
+
+│ ⚙️ #promote
+
+│ ⚙️ #revoke
+
+│ ⚙️ #tagall [1m<mesaje>[22m
+
+│ ⚙️ #invocar [1m<mesaje>[22m
+
+╰────────────────╯
+
+╭─〔 〽️ ᴛᴏᴏʟꜱ 〕─╮
+│ ⚙️ #upscale
+
+│ ⚙️ #fake
+
+│ ⚙️ #ssweb
+
+│ ⚙️ #ss
+
+│ ⚙️ #trad
+
+│ ⚙️ #spamwa <number>|<mesage>|<no of messages>
+
+│ ⚙️ #IPdoxx
+
+╰────────────────╯
+
+╭─〔 〽️ ɪᴍᴀɢᴇ 〕─╮
+│ ⚙️ #upscale
+
+╰────────────────╯
+
+╭─〔 〽️ ᴀɪ 〕─╮
+│ ⚙️ #toanime
+
+│ ⚙️ #toghibli
+
+│ ⚙️ #suno <prompt>
+
+╰────────────────╯
+
+╭─〔 〽️ ɪᴍɢ 〕─╮
+│ ⚙️ #waifu
+
+╰────────────────╯
+
+╭─〔 〽️ ɪɴꜰᴏ 〕─╮
+│ ⚙️ #creador
+
+│ ⚙️ #owner
+
+│ ⚙️ #status
+
+│ ⚙️ #grupos
+
+│ ⚙️ reglas
+
+│ ⚙️ #script
+
+│ ⚙️ #reportar
+
+╰────────────────╯
+
+╭─〔 〽️ ᴊᴀᴅɪʙᴏᴛ 〕─╮
+│ ⚙️ #bots
+
+│ ⚙️ #token
+
+│ ⚙️ #gettoken
+
+│ ⚙️ #serbottoken
+
+╰────────────────╯
+
+╭─〔 〽️ ʀᴘɢ 〕─╮
+│ ⚙️ #menurpg
+
+│ ⚙️ #tenertodo
+
+│ ⚙️ #lb [página]
+
+│ ⚙️ #bank
+
+│ ⚙️ #banco
+
+│ ⚙️ #cajamisteriosa
+
+│ ⚙️ #cazar
+
+│ ⚙️ #daily
+
+│ ⚙️ #claim
+
+│ ⚙️ #escudo <horas>
+
+│ ⚙️ #cambiarexp <cantidad>
+
+│ ⚙️ #explorar
+
+│ ⚙️ #invocacion
+
+│ ⚙️ #levelup
+
+│ ⚙️ #listarpersonajes
+
+│ ⚙️ #minar
+
+│ ⚙️ #miestatus
+
+│ ⚙️ #mimonedas
+
+│ ⚙️ #miexp
+
+│ ⚙️ #mispersonajes
+
+│ ⚙️ #mispjs
+
+│ ⚙️ #inventario
+
+│ ⚙️ #comprarpersonaje <nombre>
+
+│ ⚙️ #reinado
+
+│ ⚙️ #reinado reset
+
+│ ⚙️ #rob2
+
+│ ⚙️ #rob
+
+│ ⚙️ #sacrificar <nombre>
+
+│ ⚙️ #toppersonajes
+
+│ ⚙️ #trabajar
+
+│ ⚙️ #work
+
+│ ⚙️ #transferir [1m@usuario cantidad[22m
+
+│ ⚙️ #invasionzombie
+
+╰────────────────╯
+
+╭─〔 〽️ ꜰɪx 〕─╮
+│ ⚙️ #dsowner
+
+╰────────────────╯
+
+╭─〔 〽️ ʀɢ 〕─╮
+│ ⚙️ #profile
+
+│ ⚙️ #unreg
+
+╰────────────────╯
+
+╭─〔 〽️ ᴘʀᴇᴍɪᴜᴍ 〕─╮
+│ ⚙️ #comprarpremium <cantidad> <unidad>
+
+│ ⚙️ #listavip
+
+╰────────────────╯
+
+╭─〔 〽️ ᴊᴜᴇɢᴏꜱ 〕─╮
+│ ⚙️ #cajamisteriosa
+
+╰────────────────╯
+
+╭─〔 〽️ ᴇᴄᴏɴᴏᴍɪᴀ 〕─╮
+│ ⚙️ #cajamisteriosa
+
+│ ⚙️ #listarpersonajes
+
+│ ⚙️ #miestatus
+
+│ ⚙️ #mimonedas
+
+│ ⚙️ #miexp
+
+│ ⚙️ #mispersonajes
+
+│ ⚙️ #mispjs
+
+│ ⚙️ #inventario
+
+│ ⚙️ #trabajar
+
+│ ⚙️ #work
+
+│ ⚙️ #transferir [1m@usuario cantidad[22m
+
+╰────────────────╯
+
+╭─〔 〽️ ᴇᴄᴏɴ 〕─╮
+│ ⚙️ #cambiarexp <cantidad>
+
+╰────────────────╯
+
+╭─〔 〽️ ʀᴀɴᴋɪɴɢ 〕─╮
+│ ⚙️ #reinado
+
+│ ⚙️ #reinado reset
+
+│ ⚙️ #toppersonajes
+
+╰────────────────╯
+
+╭─〔 〽️ ꜱᴛɪᴄᴋᴇʀ 〕─╮
+│ ⚙️ #sticker <imagen|video|url>
+
+│ ⚙️ #stiker <imagen|video|url>
+
+│ ⚙️ #s <imagen|video|url>
+
+│ ⚙️ #qc <texto>
+
+│ ⚙️ #take <nombre>|<autor>
+
+╰────────────────╯
+
+〽️ 𝗠𝗘𝗡𝗨 〽️ - 
+[25/9/2025, 8:25:10 p. m.] +58 412-5689337 ~~ Maikol > #code
+[25/9/2025, 8:25:14 p. m.] +58 426-9940771 ~null > 『 [1m𝑪𝒓𝒚𝒑𝒕𝒊𝒄𝑴𝒂𝒔𝒕𝒆𝒓 && SubBot[22m   
+
+ [1mUsa este Código para convertirte en un ✧ Sub-Bot Temporal [22m  
+
+ [1mVinculación Manual:[22m  
+> 1 » Pulsa los ⋮ [1mtres puntos[22m en la esquina superior derecha de WhatsApp  
+> 2 » Selecciona [1mDispositivos Vinculados[22m 
+> 3 » Elige [1mVincular con número de teléfono[22m 
+> 4 » Introduce el
+
+[25/9/2025, 8:25:14 p. m.] +58 426-9940771 ~null > WXB1-9H1K
+[25/9/2025, 8:26:00 p. m.] +58 412-5689337 ~~ Maikol > ...
+[25/9/2025, 8:26:07 p. m.] undefined > No m calmo porque quiera
+[25/9/2025, 8:26:11 p. m.] undefined > No traes nada bueno
+[25/9/2025, 8:26:11 p. m.] undefined > Ni yo
+[25/9/2025, 8:26:13 p. m.] undefined > 🚩 [1mEste usuario ya ha sido mutado[22m
+[25/9/2025, 8:26:14 p. m.] undefined > Maiki
+[25/9/2025, 8:26:19 p. m.] undefined > Marico pobre de ti cuando tu mamá sepa que le hiciste un sticker a tu mamá
+[25/9/2025, 8:26:23 p. m.] undefined > Xd
+[25/9/2025, 8:26:23 p. m.] undefined > XD le hizo un sticker
+[25/9/2025, 8:26:23 p. m.] undefined > Angy
+[25/9/2025, 8:38:39 p. m.] +58 412-5689337 ~~ Maikol > !help
+[25/9/2025, 8:38:39 p. m.] +58 412-5689337 ~~ Maikol > #help
+[25/9/2025, 8:38:40 p. m.] +58 426-9940771 ~null > ❌ Error de sintaxis:
+[1m#help[22m
+📕 Usa [1m#help[22m para ver el menú.
+[25/9/2025, 8:38:40 p. m.] +58 412-5689337 ~~ Maikol > M E N U R P G
+[25/9/2025, 8:38:40 p. m.] +58 412-5689337 ~~ Maikol > SER BOT
+[25/9/2025, 8:38:40 p. m.] +58 412-5689337 ~~ Maikol > M E N U R P G
+[25/9/2025, 8:44:53 p. m.] +593 96 953 3280 ~𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 > #p
+[25/9/2025, 8:44:55 p. m.] +58 426-9940771 ~null >  [1mTime Bot[22m
+
+> Velocidad:
+> ⤿ `0.0159` ms
+
+> Actividad:
+> ⤿ `00:06:39`
+
+> Chats:
+> ⤿ `3` Chats privados
+> ⤿ 1 Grupos
+
+> Servidor:
+> ⤿ RAM: `10.54 GB` / 15.88 GB
+
+> relative time
+[25/9/2025, 8:44:57 p. m.] +58 416-3679167 ~xGhr.mp5 >  [1mTime Bot[22m
+
+> Velocidad:
+> ⤿ `0.0076` ms
+
+> Actividad:
+> ⤿ `01:55:57`
+
+> Chats:
+> ⤿ `19` Chats privados
+> ⤿ 8 Grupos
+
+> Servidor:
+> ⤿ RAM: `807.85 MB` / 11.68 GB
+
+> relative time
+[25/9/2025, 8:45:22 p. m.] +593 96 953 3280 ~𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 > Jodel
+[25/9/2025, 8:45:28 p. m.] +593 96 953 3280 ~𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 > #p
+[25/9/2025, 8:45:29 p. m.] +58 426-9940771 ~null >  [1mTime Bot[22m
+
+> Velocidad:
+> ⤿ `0.0138` ms
+
+> Actividad:
+> ⤿ `00:07:13`
+
+> Chats:
+> ⤿ `3` Chats privados
+> ⤿ 1 Grupos
+
+> Servidor:
+> ⤿ RAM: `10.52 GB` / 15.88 GB
+
+> relative time
+[25/9/2025, 8:45:35 p. m.] +58 416-3679167 ~xGhr.mp5 >  [1mTime Bot[22m
+
+> Velocidad:
+> ⤿ `0.0030` ms
+
+> Actividad:
+> ⤿ `01:56:30`
+
+> Chats:
+> ⤿ `19` Chats privados
+> ⤿ 8 Grupos
+
+> Servidor:
+> ⤿ RAM: `809.87 MB` / 11.68 GB
+
+> relative time
+[25/9/2025, 8:46:26 p. m.] +593 96 953 3280 ~𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 > #p
+[25/9/2025, 8:46:26 p. m.] +58 426-9940771 ~null >  [1mTime Bot[22m
+
+> Velocidad:
+> ⤿ `0.0099` ms
+
+> Actividad:
+> ⤿ `00:08:11`
+
+> Chats:
+> ⤿ `3` Chats privados
+> ⤿ 1 Grupos
+
+> Servidor:
+> ⤿ RAM: `10.46 GB` / 15.88 GB
+
+> relative time
+[25/9/2025, 8:46:37 p. m.] +58 416-3679167 ~xGhr.mp5 >  [1mTime Bot[22m
+
+> Velocidad:
+> ⤿ `0.0021` ms
+
+> Actividad:
+> ⤿ `01:57:30`
+
+> Chats:
+> ⤿ `19` Chats privados
+> ⤿ 8 Grupos
+
+> Servidor:
+> ⤿ RAM: `833.18 MB` / 11.68 GB
+
+> relative time
+[25/9/2025, 8:46:55 p. m.] +54 9 11 3151-8889 ~Downtex > Que paso
+[25/9/2025, 8:47:41 p. m.] +593 96 953 3280 ~𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 > Se supone que ya está
+[25/9/2025, 8:47:44 p. m.] +593 96 953 3280 ~𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 > Nada
+[25/9/2025, 8:48:47 p. m.] +54 9 11 3151-8889 ~Downtex > Kliao, justo cuando estaba en llamada con una piba unos amigos entran a la llamada y dicen "downtex downtex uníte a la otra llamada" que jodido amigo
+[25/9/2025, 8:49:00 p. m.] +54 9 11 3151-8889 ~Downtex > Y la piba se salió
+[25/9/2025, 8:50:06 p. m.] +58 412-5689337 ~~ Maikol > #help
+[25/9/2025, 8:50:07 p. m.] +58 426-9940771 ~null > ⎯͟͞͞★ ✦ 𝙐𝙎𝙀𝙍 𝙎𝙏𝘼𝙏𝙐𝙎 ✦ ★͟͞͞⎯
+│  𝙉𝙤𝙢𝙗𝙧𝙚   » ~ Maikol  
+│  𝙇𝙫𝙡       »   
+│  𝙀𝙭𝙥       » 3630 / 69  
+│  𝙈𝙤𝙙𝙚      » Público  
+│  𝘼𝙘𝙩𝙞𝙫𝙤   » 00:11:41  
+│  𝙐𝙨𝙪𝙖𝙧𝙞𝙤𝙨 » 43  
+★━━━━━━━━━━━━━━━━━★
+  
+  » Owner: 𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 «
+
+
+
+╭─〔 〽️ ꜱɪꜱᴛᴇᴍᴀ 〕─╮
+│ ⚙️ #formarpareja5
+
+│ ⚙️ #totalfunciones
+
+│ ⚙️ #menu
+
+│ ⚙️ #menú
+
+│ ⚙️ #menu2
+
+│ ⚙️ #runtime
+
+│ ⚙️ #blocklist
+
+╰────────────────╯
+
+╭─〔 〽️ ɢʀᴜᴘᴏꜱ 〕─╮
+│ ⚙️ #enable <opción>
+
+│ ⚙️ #disable <opción>
+
+│ ⚙️ #staff
+
+│ ⚙️ #admins
+
+│ ⚙️ #listadmin
+
+│ ⚙️ #demote
+
+╰────────────────╯
+
+╭─〔 〽️ ꜱᴜʙ ʙᴏᴛꜱ 〕─╮
+│ ⚙️ #qr
+
+│ ⚙️ #code
+
+╰────────────────╯
+
+╭─〔 〽️ ᴀɴɪᴍᴇ 〕─╮
+│ ⚙️ #animelink
+
+│ ⚙️ #infoanime
+
+│ ⚙️ #topwaifus [página]
+
+│ ⚙️ #wvideo <nombre del personaje>
+
+│ ⚙️ #wimage <nombre del personaje>
+
+│ ⚙️ #charinfo <nombre del personaje>
+
+│ ⚙️ #winfo <nombre del personaje>
+
+│ ⚙️ #waifuinfo <nombre del personaje>
+
+│ ⚙️ #alisa
+
+│ ⚙️ #aihoshino
+
+│ ⚙️ #remcham
+
+│ ⚙️ #akira
+
+│ ⚙️ #akiyama
+
+│ ⚙️ #anna
+
+│ ⚙️ #asuna
+
+│ ⚙️ #ayuzawa
+
+│ ⚙️ #boruto
+
+│ ⚙️ #chiho
+
+│ ⚙️ #chitoge
+
+│ ⚙️ #deidara
+
+│ ⚙️ #erza
+
+│ ⚙️ #elaina
+
+│ ⚙️ #eba
+
+│ ⚙️ #emilia
+
+│ ⚙️ #hestia
+
+│ ⚙️ #hinata
+
+│ ⚙️ #inori
+
+│ ⚙️ #isuzu
+
+│ ⚙️ #itachi
+
+│ ⚙️ #itori
+
+│ ⚙️ #kaga
+
+│ ⚙️ #kagura
+
+│ ⚙️ #kaori
+
+│ ⚙️ #keneki
+
+│ ⚙️ #kotori
+
+│ ⚙️ #kurumitokisaki
+
+│ ⚙️ #madara
+
+│ ⚙️ #mikasa
+
+│ ⚙️ #miku
+
+│ ⚙️ #minato
+
+│ ⚙️ #naruto
+
+│ ⚙️ #nezuko
+
+│ ⚙️ #sagiri
+
+│ ⚙️ #sasuke
+
+│ ⚙️ #sakura
+
+╰────────────────╯
+
+╭─〔 〽️ ᴀᴜᴅɪᴏ 〕─╮
+│ ⚙️ #bass [vn]
+
+│ ⚙️ #blown [vn]
+
+│ ⚙️ #deep [vn]
+
+│ ⚙️ #earrape [vn]
+
+│ ⚙️ #fast [vn]
+
+│ ⚙️ #fat [vn]
+
+│ ⚙️ #nightcore [vn]
+
+│ ⚙️ #reverse [vn]
+
+│ ⚙️ #robot [vn]
+
+│ ⚙️ #slow [vn]
+
+│ ⚙️ #smooth [vn]
+
+│ ⚙️ #tupai [vn]
+
+╰────────────────╯
+
+╭─〔 〽️ ʙᴏᴛ 〕─╮
+│ ⚙️ #ping
+
+╰────────────────╯
+
+╭─〔 〽️ ʙᴜꜱᴄᴀᴅᴏʀ 〕─╮
+│ ⚙️ #pornhubsearch
+
+│ ⚙️ #tiktoksearch <txt>
+
+│ ⚙️ #xnxxsearch <query>
+
+│ ⚙️ #githubsearch
+
+│ ⚙️ #mercadolibre <búsqueda>
+
+│ ⚙️ #imagen <query>
+
+│ ⚙️ #gitclone
+
+╰────────────────╯
+
+╭─〔 〽️ ꜱᴇᴀʀᴄʜ 〕─╮
+│ ⚙️ #ytsearch [1m<texto>[22m
+
+│ ⚙️ #pinterest
+
+╰────────────────╯
+
+╭─〔 〽️ ɴꜱꜰᴡ 〕─╮
+│ ⚙️ #undefined
+
+│ ⚙️ #nsfwloli
+
+│ ⚙️ #nsfwfoot
+
+│ ⚙️ #nsfwass
+
+│ ⚙️ #nsfwbdsm
+
+│ ⚙️ #nsfwcum
+
+│ ⚙️ #nsfwero
+
+│ ⚙️ #nsfwfemdom
+
+│ ⚙️ #nsfwglass
+
+│ ⚙️ #nsfworgy
+
+│ ⚙️ #yuri
+
+│ ⚙️ #yaoi
+
+│ ⚙️ #panties
+
+│ ⚙️ #tetas
+
+│ ⚙️ #booty
+
+│ ⚙️ #ecchi
+
+│ ⚙️ #furro
+
+│ ⚙️ #hentai
+
+│ ⚙️ #trapito
+
+│ ⚙️ #imagenlesbians
+
+│ ⚙️ #pene
+
+│ ⚙️ #porno
+
+│ ⚙️ #randomxxx
+
+│ ⚙️ #pechos
+
+╰────────────────╯
+
+╭─〔 〽️ ᴏᴡɴᴇʀ 〕─╮
+│ ⚙️ #enable <opción>
+
+│ ⚙️ #disable <opción>
+
+│ ⚙️ #expired [1m<días>[22m
+
+│ ⚙️ #añadirmonedas @usuario cantidad
+
+│ ⚙️ #groups
+
+│ ⚙️ #grouplist
+
+│ ⚙️ #reunion
+
+│ ⚙️ #meeting
+
+│ ⚙️ #addprem [@user] <days>
+
+│ ⚙️ #autoadmin
+
+│ ⚙️ #copia
+
+│ ⚙️ #banuser <@tag> <razón>
+
+│ ⚙️ #broadcast
+
+│ ⚙️ #bc
+
+│ ⚙️ #broadcastgroup
+
+│ ⚙️ #bcgc
+
+│ ⚙️ #bcgc2
+
+│ ⚙️ #bcg
+
+│ ⚙️ #broadcast
+
+│ ⚙️ #bc3
+
+│ ⚙️ #cheat
+
+│ ⚙️ #cleartmp
+
+│ ⚙️ #delprem <@user>
+
+│ ⚙️ #dsowner
+
+│ ⚙️ > 
+
+│ ⚙️ => 
+
+│ ⚙️ $
+
+│ ⚙️ #fetch
+
+│ ⚙️ #get
+
+│ ⚙️ #ip <alamat ip>
+
+│ ⚙️ #join <link>
+
+│ ⚙️ #grupocrear <nombre>
+
+│ ⚙️ #nuevonombrebot <teks>
+
+│ ⚙️ #resetpersonajes
+
+│ ⚙️ #undefined
+
+│ ⚙️ #restart
+
+│ ⚙️ #unbanuser <@tag>
+
+│ ⚙️ #update
+
+│ ⚙️ #actualizar
+
+╰────────────────╯
+
+╭─〔 〽️ ᴛʀᴀɴꜱꜰᴏʀᴍᴀᴅᴏʀ 〕─╮
+│ ⚙️ #tourl2
+
+│ ⚙️ #tourl
+
+│ ⚙️ #togifaud
+
+╰────────────────╯
+
+╭─〔 〽️ ʜᴇʀʀᴀᴍɪᴇɴᴛᴀꜱ 〕─╮
+│ ⚙️ #toimg
+
+╰────────────────╯
+
+╭─〔 〽️ ᴅᴇꜱᴄᴀʀɢᴀꜱ 〕─╮
+│ ⚙️ #spotify [1m<nombre>[22m
+
+│ ⚙️ #imagen <query>
+
+│ ⚙️ #mediafire
+
+│ ⚙️ #pornhubdl
+
+│ ⚙️ #ytmp3
+
+│ ⚙️ #ytmp4doc
+
+│ ⚙️ #ytmp3doc
+
+│ ⚙️ #ytmp4 <url>
+
+│ ⚙️ #facebook
+
+│ ⚙️ #fb
+
+│ ⚙️ #instagram
+
+│ ⚙️ #ig
+
+╰────────────────╯
+
+╭─〔 〽️ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ 〕─╮
+│ ⚙️ #undefined
+
+╰────────────────╯
+
+╭─〔 〽️ ᴅʟ 〕─╮
+│ ⚙️ #tiktok
+
+╰────────────────╯
+
+╭─〔 〽️ ꜰᴜɴ 〕─╮
+│ ⚙️ #amistad
+
+│ ⚙️ #facto
+
+│ ⚙️ #love
+
+│ ⚙️ #mamada @tag
+
+│ ⚙️ #memev
+
+│ ⚙️ #pajeame
+
+│ ⚙️ #formartrio @usuario1 @usuario2
+
+│ ⚙️ #verdad
+
+│ ⚙️ #acertijo
+
+│ ⚙️ #gay <@tag> | <nombre>
+
+│ ⚙️ #lesbiana <@tag> | <nombre>
+
+│ ⚙️ #pajero <@tag> | <nombre>
+
+│ ⚙️ #pajera <@tag> | <nombre>
+
+│ ⚙️ #puto <@tag> | <nombre>
+
+│ ⚙️ #puta <@tag> | <nombre>
+
+│ ⚙️ #manco <@tag> | <nombre>
+
+│ ⚙️ #manca <@tag> | <nombre>
+
+│ ⚙️ #rata <@tag> | <nombre>
+
+│ ⚙️ #prostituta <@tag> | <nombre>
+
+│ ⚙️ #prostituto <@tag> | <nombre>
+
+│ ⚙️ #consejo
+
+│ ⚙️ #dance [1m<@user>[22m
+
+│ ⚙️ #doxear
+
+│ ⚙️ #formarpareja5
+
+│ ⚙️ #enamorada @tag
+
+│ ⚙️ #math
+
+│ ⚙️ #meme
+
+│ ⚙️ #personalidad
+
+│ ⚙️ #piropo
+
+│ ⚙️ #pokedex [1m<pokemon>[22m
+
+│ ⚙️ #ppt
+
+│ ⚙️ #reto
+
+│ ⚙️ #ruleta [1m<cantidad> <color>[22m
+
+│ ⚙️ #simi
+
+│ ⚙️ #bot
+
+│ ⚙️ #top [1m<texto>[22m
+
+│ ⚙️ #zodiac [1m2002 02 25[22m
+
+╰────────────────╯
+
+╭─〔 〽️ ɢᴀᴄʜᴀ 〕─╮
+│ ⚙️ #antirobo <hora|dia|semana|mes>
+
+│ ⚙️ #claim
+
+│ ⚙️ #desbloquear @usuario
+
+│ ⚙️ #listawaifus
+
+│ ⚙️ #miswaifus
+
+│ ⚙️ #resetwaifus
+
+│ ⚙️ #robarwaifu <id>
+
+│ ⚙️ #robawaifu <id>
+
+│ ⚙️ #ver
+
+│ ⚙️ #rw
+
+│ ⚙️ #rollwaifu
+
+╰────────────────╯
+
+╭─〔 〽️ ᴇᴍᴏx 〕─╮
+│ ⚙️ #agarrarnalgas @tag
+
+│ ⚙️ #anal/culiar @tag
+
+│ ⚙️ #angry/enojado @tag
+
+│ ⚙️ #bath/bañarse @tag
+
+│ ⚙️ #blowjob/mamada @tag
+
+│ ⚙️ #blush/sonrojarse @tag
+
+│ ⚙️ #chuparpata @tag
+
+│ ⚙️ #cry/llorar @tag
+
+│ ⚙️ #cuddle/acurrucarse @tag
+
+│ ⚙️ #drunk/borracho @tag
+
+│ ⚙️ #grabboobs/agarrartetas @tag
+
+│ ⚙️ #hello/hola @tag
+
+│ ⚙️ #hug/abrazar @tag
+
+│ ⚙️ #kill/matar @tag
+
+│ ⚙️ #kiss/besar @tag
+
+│ ⚙️ #kiss2/besar2 @tag
+
+│ ⚙️ #love2/enamorada @tag
+
+│ ⚙️ #patt/acariciar @tag
+
+│ ⚙️ #penetrar @user
+
+│ ⚙️ #punch/golpear @tag
+
+│ ⚙️ #sad/triste @tag
+
+│ ⚙️ #scared/asustada @tag
+
+│ ⚙️ #seduce/seducir @tag
+
+│ ⚙️ #sexo/sex @tag
+
+│ ⚙️ #sleep/dormir @tag
+
+│ ⚙️ #violar/perra @tag
+
+╰────────────────╯
+
+╭─〔 〽️ ᴇᴄᴏɴᴏᴍʏ 〕─╮
+│ ⚙️ #undefined
+
+╰────────────────╯
+
+╭─〔 〽️ ɴꜱꜰᴡꜱ 〕─╮
+│ ⚙️ #follar @tag
+
+╰────────────────╯
+
+╭─〔 〽️ ɢʀᴜᴘᴏ 〕─╮
+│ ⚙️ #kick @usuario
+
+│ ⚙️ #add
+
+│ ⚙️ #group <abrir/cerrar>
+
+│ ⚙️ #grupo <abrir/cerrar>
+
+│ ⚙️ #encuesta <text|text2>
+
+│ ⚙️ #undefined
+
+│ ⚙️ #hidetag
+
+│ ⚙️ #infogrupo
+
+│ ⚙️ #invite [1m<numero>[22m
+
+│ ⚙️ #link
+
+│ ⚙️ #listadv
+
+│ ⚙️ #promote
+
+│ ⚙️ #revoke
+
+│ ⚙️ #tagall [1m<mesaje>[22m
+
+│ ⚙️ #invocar [1m<mesaje>[22m
+
+╰────────────────╯
+
+╭─〔 〽️ ᴀɪ 〕─╮
+│ ⚙️ #suno <prompt>
+
+│ ⚙️ #toanime
+
+│ ⚙️ #toghibli
+
+╰────────────────╯
+
+╭─〔 〽️ ᴛᴏᴏʟꜱ 〕─╮
+│ ⚙️ #spamwa <number>|<mesage>|<no of messages>
+
+│ ⚙️ #upscale
+
+│ ⚙️ #fake
+
+│ ⚙️ #ssweb
+
+│ ⚙️ #ss
+
+│ ⚙️ #trad
+
+│ ⚙️ #IPdoxx
+
+╰────────────────╯
+
+╭─〔 〽️ ɪᴍᴀɢᴇ 〕─╮
+│ ⚙️ #upscale
+
+╰────────────────╯
+
+╭─〔 〽️ ɪᴍɢ 〕─╮
+│ ⚙️ #waifu
+
+╰────────────────╯
+
+╭─〔 〽️ ɪɴꜰᴏ 〕─╮
+│ ⚙️ #creador
+
+│ ⚙️ #owner
+
+│ ⚙️ #status
+
+│ ⚙️ #grupos
+
+│ ⚙️ reglas
+
+│ ⚙️ #script
+
+│ ⚙️ #reportar
+
+╰────────────────╯
+
+╭─〔 〽️ ᴊᴀᴅɪʙᴏᴛ 〕─╮
+│ ⚙️ #bots
+
+│ ⚙️ #token
+
+│ ⚙️ #gettoken
+
+│ ⚙️ #serbottoken
+
+╰────────────────╯
+
+╭─〔 〽️ ʀᴘɢ 〕─╮
+│ ⚙️ #menurpg
+
+│ ⚙️ #tenertodo
+
+│ ⚙️ #lb [página]
+
+│ ⚙️ #bank
+
+│ ⚙️ #banco
+
+│ ⚙️ #cajamisteriosa
+
+│ ⚙️ #cazar
+
+│ ⚙️ #daily
+
+│ ⚙️ #claim
+
+│ ⚙️ #escudo <horas>
+
+│ ⚙️ #cambiarexp <cantidad>
+
+│ ⚙️ #explorar
+
+│ ⚙️ #invocacion
+
+│ ⚙️ #levelup
+
+│ ⚙️ #listarpersonajes
+
+│ ⚙️ #minar
+
+│ ⚙️ #miestatus
+
+│ ⚙️ #mimonedas
+
+│ ⚙️ #miexp
+
+│ ⚙️ #mispersonajes
+
+│ ⚙️ #mispjs
+
+│ ⚙️ #inventario
+
+│ ⚙️ #comprarpersonaje <nombre>
+
+│ ⚙️ #reinado
+
+│ ⚙️ #reinado reset
+
+│ ⚙️ #rob2
+
+│ ⚙️ #rob
+
+│ ⚙️ #sacrificar <nombre>
+
+│ ⚙️ #toppersonajes
+
+│ ⚙️ #trabajar
+
+│ ⚙️ #work
+
+│ ⚙️ #transferir [1m@usuario cantidad[22m
+
+│ ⚙️ #invasionzombie
+
+╰────────────────╯
+
+╭─〔 〽️ ꜰɪx 〕─╮
+│ ⚙️ #dsowner
+
+╰────────────────╯
+
+╭─〔 〽️ ʀɢ 〕─╮
+│ ⚙️ #profile
+
+│ ⚙️ #unreg
+
+╰────────────────╯
+
+╭─〔 〽️ ᴘʀᴇᴍɪᴜᴍ 〕─╮
+│ ⚙️ #comprarpremium <cantidad> <unidad>
+
+│ ⚙️ #listavip
+
+╰────────────────╯
+
+╭─〔 〽️ ᴊᴜᴇɢᴏꜱ 〕─╮
+│ ⚙️ #cajamisteriosa
+
+╰────────────────╯
+
+╭─〔 〽️ ᴇᴄᴏɴᴏᴍɪᴀ 〕─╮
+│ ⚙️ #cajamisteriosa
+
+│ ⚙️ #listarpersonajes
+
+│ ⚙️ #miestatus
+
+│ ⚙️ #mimonedas
+
+│ ⚙️ #miexp
+
+│ ⚙️ #mispersonajes
+
+│ ⚙️ #mispjs
+
+│ ⚙️ #inventario
+
+│ ⚙️ #trabajar
+
+│ ⚙️ #work
+
+│ ⚙️ #transferir [1m@usuario cantidad[22m
+
+╰────────────────╯
+
+╭─〔 〽️ ᴇᴄᴏɴ 〕─╮
+│ ⚙️ #cambiarexp <cantidad>
+
+╰────────────────╯
+
+╭─〔 〽️ ʀᴀɴᴋɪɴɢ 〕─╮
+│ ⚙️ #reinado
+
+│ ⚙️ #reinado reset
+
+│ ⚙️ #toppersonajes
+
+╰────────────────╯
+
+╭─〔 〽️ ꜱᴛɪᴄᴋᴇʀ 〕─╮
+│ ⚙️ #sticker <imagen|video|url>
+
+│ ⚙️ #stiker <imagen|video|url>
+
+│ ⚙️ #s <imagen|video|url>
+
+│ ⚙️ #qc <texto>
+
+│ ⚙️ #take <nombre>|<autor>
+
+╰────────────────╯
+
+〽️ 𝗠𝗘𝗡𝗨 〽️ - 
+[25/9/2025, 8:50:20 p. m.] +58 412-5689337 ~~ Maikol > #code
+[25/9/2025, 8:50:25 p. m.] +58 426-9940771 ~null > 『 [1m𝑪𝒓𝒚𝒑𝒕𝒊𝒄𝑴𝒂𝒔𝒕𝒆𝒓 && SubBot[22m   
+
+ [1mUsa este Código para convertirte en un ✧ Sub-Bot Temporal [22m  
+
+ [1mVinculación Manual:[22m  
+> 1 » Pulsa los ⋮ [1mtres puntos[22m en la esquina superior derecha de WhatsApp  
+> 2 » Selecciona [1mDispositivos Vinculados[22m 
+> 3 » Elige [1mVincular con número de teléfono[22m 
+> 4 » Introduce el
+
+[25/9/2025, 8:50:27 p. m.] +58 426-9940771 ~null > BCVW-HQF7
+[25/9/2025, 8:53:45 p. m.] +593 96 953 3280 ~𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 > Nmms
+[25/9/2025, 8:53:52 p. m.] +593 96 953 3280 ~𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 > Justo cuando tenías afecto femenino
+[25/9/2025, 9:05:35 p. m.] +54 9 11 3151-8889 ~Downtex > Ese w
+[25/9/2025, 9:06:28 p. m.] +593 96 953 3280 ~𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 > #p
+[25/9/2025, 9:06:29 p. m.] +58 426-9940771 ~null >  [1mTime Bot[22m
+
+> Velocidad:
+> ⤿ `0.0061` ms
+
+> Actividad:
+> ⤿ `00:28:14`
+
+> Chats:
+> ⤿ `3` Chats privados
+> ⤿ 1 Grupos
+
+> Servidor:
+> ⤿ RAM: `9.95 GB` / 15.88 GB
+
+> relative time
+[25/9/2025, 9:06:37 p. m.] +58 416-3679167 ~xGhr.mp5 >  [1mTime Bot[22m
+
+> Velocidad:
+> ⤿ `0.0033` ms
+
+> Actividad:
+> ⤿ `02:17:33`
+
+> Chats:
+> ⤿ `19` Chats privados
+> ⤿ 8 Grupos
+
+> Servidor:
+> ⤿ RAM: `809.71 MB` / 11.68 GB
+
+> relative time
+[25/9/2025, 9:13:42 p. m.] undefined ~Dey > Soy marinette
+[25/9/2025, 9:21:03 p. m.] +593 96 953 3280 ~𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 > #p
+[25/9/2025, 9:21:05 p. m.] +58 426-9940771 ~null >  [1mTime Bot[22m
+
+> Velocidad:
+> ⤿ `0.0563` ms
+
+> Actividad:
+> ⤿ `00:42:49`
+
+> Chats:
+> ⤿ `4` Chats privados
+> ⤿ 1 Grupos
+
+> Servidor:
+> ⤿ RAM: `10.2 GB` / 15.88 GB
+
+> relative time
+[25/9/2025, 9:21:08 p. m.] +58 416-3679167 ~xGhr.mp5 >  [1mTime Bot[22m
+
+> Velocidad:
+> ⤿ `0.0444` ms
+
+> Actividad:
+> ⤿ `02:32:08`
+
+> Chats:
+> ⤿ `19` Chats privados
+> ⤿ 8 Grupos
+
+> Servidor:
+> ⤿ RAM: `809.75 MB` / 11.68 GB
+
+> relative time
+[25/9/2025, 9:24:16 p. m.] +593 96 953 3280 ~𝕮𝖍𝖔𝖈𝖔𝖕𝖑𝖚𝖘 > [94m@undefined[39m
+[25/9/2025, 9:34:41 p. m.] +54 9 11 3151-8889 ~Downtex > Que
